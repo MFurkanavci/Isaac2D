@@ -364,10 +364,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 255170420}
   moveSpeed: 5
-  rollSpeed: 10
-  rollDuration: 0.5
-  rollCooldown: 0.5
-  rollInvincibility: 0.5
+  rollSpeed: 15
+  rollDuration: 0.33
+  rollCooldown: 1
+  rollInvincibility: 0.33
 --- !u!50 &255170420
 Rigidbody2D:
   serializedVersion: 4
