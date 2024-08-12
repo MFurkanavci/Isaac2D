@@ -7,6 +7,8 @@ public abstract class Enemy: MonoBehaviour
     [Header("Loot Pooling")]
     public ObjectPool objectPool;
     public string lootTag = "Loot";
+    
+    public float lootDropChance;
 
     [Header("Enemy Components")]
     protected Rigidbody2D rb;
@@ -17,10 +19,6 @@ public abstract class Enemy: MonoBehaviour
     public float moveSpeed;
     public int health;
     public int damage;
-
-    [Header("Loot")]
-    public GameObject lootDrop;
-    public float lootDropChance;
 
     protected virtual void Start()
     {
@@ -69,6 +67,6 @@ public abstract class Enemy: MonoBehaviour
 
     public virtual void OnSpawn()
     {
-        health = 100;
+        health = 1;
     }
 }
