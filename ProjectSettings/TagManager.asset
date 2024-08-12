@@ -46,3 +46,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Dungeon
+    uniqueID: 3678592933
+    locked: 0
+  - name: Enemies
+    uniqueID: 3183716423
+    locked: 0
+  - name: Skills
+    uniqueID: 3416365867
+    locked: 0
+  - name: Player
+    uniqueID: 1425822369
+    locked: 0
