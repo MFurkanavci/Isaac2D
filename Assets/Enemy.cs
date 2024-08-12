@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy: MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [Header("Loot Pooling")]
     public ObjectPool objectPool;
     public string lootTag = "Loot";
-    
+
     public float lootDropChance;
 
     [Header("Enemy Components")]
@@ -48,20 +48,27 @@ public abstract class Enemy: MonoBehaviour
 
     protected virtual void Die()
     {
+        LootDrop();
+        objectPool.ReturnToPool(gameObject, "Enemy");
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.TryGetComponent(out Player player))
+        {
+            player.TakeDamage(damage);
+        }
+    }
+
+    /// <summary>
+    /// HATAAAAA
+    /// </summary>
+    protected virtual void LootDrop()
+    {
         if (Random.value <= lootDropChance)
         {
             GameObject loot = objectPool.GetFromPool(lootTag, transform.position, Quaternion.identity);
             loot.GetComponent<Loot>().OnSpawn();
-        }
-        Destroy(gameObject);
-    }
-
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out Player player))
-        {
-            player.TakeDamage(damage);
-            Die();
         }
     }
 

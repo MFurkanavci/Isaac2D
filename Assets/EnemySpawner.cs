@@ -63,17 +63,19 @@ public class EnemySpawner : MonoBehaviour
     {
         //hold 3- 6 number of enemies to spawn
         int enemiesToSpawn = UnityEngine.Random.Range(math.min(3, totalEnemies), math.min(6, totalEnemies));
+
         //We will set the next spawn time
         nextSpawnTime = Time.time + spawnRate;
         
         Vector3 spawnPoint = SetNewSpawnPoint();
-        //We will spawn the enemies
+        float radius = 1f;
+        //We will spawn the enemies with their own radius
         for (int i = 0; i < enemiesToSpawn; i++)
         {
-            GameObject enemy = objectPool.GetFromPool(enemyTag, spawnPoint, Quaternion.identity);
-            enemy.GetComponent<Enemy>().OnSpawn();
-
+            Vector3 spawnPosition = spawnPoint + UnityEngine.Random.insideUnitSphere * radius;
+            objectPool.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
             totalEnemies--;
         }
+        
     }
 }

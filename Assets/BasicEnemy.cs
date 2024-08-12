@@ -16,7 +16,7 @@ public class BasicEnemy : Enemy
 
     public void OnSpawn()
     {
-        // Play spawn animation
+        health = 1;
     }
 
     public void OnAttack()
