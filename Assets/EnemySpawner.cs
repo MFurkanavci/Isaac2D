@@ -25,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
         //We will get the room size and spawn point
         player = GameObject.Find("Player").GetComponent<Player>();
         roomSize = Room.GetComponent<SpriteRenderer>().bounds.size;
+        spawnPoint = new Vector3(0, 0, 0);
         //We will spawn the first group of enemies
         SpawnGroup();
     }

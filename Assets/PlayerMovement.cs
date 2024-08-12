@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public float rollInvincibility = 0.3f;
     private bool isRolling = false;
     private bool canRoll = true;
-    private Vector2 rollDirection;
 
     void Start()
     {
@@ -48,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Roll(Vector2 direction)
     {
+        Vector2 rollDirection;
         isRolling = true;
         canRoll = false;
         rollDirection = direction;
