@@ -56,8 +56,10 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = rollDirection * rollSpeed;
 
         // Enable invincibility
-        Physics2D.IgnoreLayerCollision(6, 8, true);
         Physics2D.IgnoreLayerCollision(6, 7, true);
+        Physics2D.IgnoreLayerCollision(6, 8, true);
+        Physics2D.IgnoreLayerCollision(6, 10, true);
+        Physics2D.IgnoreLayerCollision(6, 11, true);
 
         // Gradually reduce speed during the roll
         float elapsedTime = 0f;
@@ -73,8 +75,10 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector2.zero;
 
         // Disable invincibility after roll duration
-        Physics2D.IgnoreLayerCollision(6, 8, false);
         Physics2D.IgnoreLayerCollision(6, 7, false);
+        Physics2D.IgnoreLayerCollision(6, 8, false);
+        Physics2D.IgnoreLayerCollision(6, 10, false);
+        Physics2D.IgnoreLayerCollision(6, 11, false);
 
         // Wait for cooldown before allowing the next roll
         yield return new WaitForSeconds(rollCooldown);

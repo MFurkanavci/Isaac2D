@@ -144,10 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdd608b8d991ab488f1b23652b8264a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPool: {fileID: 0}
   lootTag: Loot
-  lootDropChance: 0.5
-  moveSpeed: 3
+  lootDropChance: 0.2
+  moveSpeed: 1
   health: 1
   damage: 1
 --- !u!50 &-4822363292092547660

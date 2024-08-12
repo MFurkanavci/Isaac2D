@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -6,8 +7,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemy Pooling")]
-    public ObjectPool objectPool;
-    public string enemyTag = "Enemy";
+    public List<string> enemyTags;
 
     [Header("Spawning")]
     public GameObject Room;
@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private Vector3 spawnPoint;
     public float distanceFromPlayer;
     public int totalEnemies;
-    public int enemiesPerGroup;
+    public int currentEnemies;
     public float spawnRate;
     private float nextSpawnTime;
 
@@ -25,6 +25,61 @@ public class EnemySpawner : MonoBehaviour
         //We will get the room size and spawn point
         player = GameObject.Find("Player").GetComponent<Player>();
         roomSize = Room.GetComponent<SpriteRenderer>().bounds.size;
+    }
+    private void Update()
+    {
+        if (currentEnemies <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+        if (Time.time >= nextSpawnTime)
+        {
+            SpawnGroup();
+        }
+    }
+
+    void OnDisable()
+    {
+        currentEnemies = totalEnemies;
+    }
+
+    void OnEnable()
+    {
+        nextSpawnTime = Time.time + spawnRate;
+    }
+
+    private void SpawnGroup()
+    {
+        int enemiesToSpawn;
+        int minEnemiesPerGroup;
+        int maxEnemiesPerGroup;
+        if (currentEnemies <= 5)
+        {
+            enemiesToSpawn = currentEnemies;
+        }
+        else
+        {
+            minEnemiesPerGroup = Mathf.CeilToInt(currentEnemies / 5f);
+            maxEnemiesPerGroup = Mathf.CeilToInt(currentEnemies / 3f);
+
+            enemiesToSpawn = UnityEngine.Random.Range(minEnemiesPerGroup, maxEnemiesPerGroup);
+        }
+
+        //We will set the next spawn time
+        nextSpawnTime = Time.time + spawnRate;
+
+        
+
+        Vector3 _spawnPoint = SetNewSpawnPoint();
+        float radius = 1f;
+        //We will spawn the enemies with their own radius
+        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+            string enemyTag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Count)];
+            Vector3 spawnPosition = _spawnPoint + UnityEngine.Random.insideUnitSphere * radius;
+            ObjectPool.Instance.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
+            currentEnemies--;
+        }
     }
 
     Vector3 SetNewSpawnPoint()
@@ -43,39 +98,5 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return spawnPoint;
-    }
-
-    private void Update()
-    {
-        //If we have spawned all the enemies in the room, we will destroy the spawner
-        if (totalEnemies <= 0)
-        {
-            Destroy(gameObject);
-        }
-        //If the time is greater than the next spawn time, we will spawn the next group
-        if (Time.time >= nextSpawnTime)
-        {
-            SpawnGroup();
-        }
-    }
-
-    private void SpawnGroup()
-    {
-        //hold 3- 6 number of enemies to spawn
-        int enemiesToSpawn = UnityEngine.Random.Range(math.min(3, totalEnemies), math.min(6, totalEnemies));
-
-        //We will set the next spawn time
-        nextSpawnTime = Time.time + spawnRate;
-        
-        Vector3 spawnPoint = SetNewSpawnPoint();
-        float radius = 1f;
-        //We will spawn the enemies with their own radius
-        for (int i = 0; i < enemiesToSpawn; i++)
-        {
-            Vector3 spawnPosition = spawnPoint + UnityEngine.Random.insideUnitSphere * radius;
-            objectPool.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
-            totalEnemies--;
-        }
-        
     }
 }

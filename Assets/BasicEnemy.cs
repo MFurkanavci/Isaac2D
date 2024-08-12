@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class BasicEnemy : Enemy
 {
-    public void TakeDamage(int damage)
+    protected override void Start()
     {
-        // Decrease enemy health by damage amount
+        base.Start();
     }
 
-    public void OnDeath()
+    protected override void Update()
     {
-        // Play death animation
+        base.Update();
     }
 
-    public void OnSpawn()
+    protected override void Move()
     {
-        health = 1;
+        base.Move();
     }
 
-    public void OnAttack()
+    public override void TakeDamage(int damage)
     {
-        // Play attack animation
+        base.TakeDamage(damage);
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D other)
+    {
+        base.OnTriggerEnter2D(other);
     }
 }

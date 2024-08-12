@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    //instance of the object pool
+    public static ObjectPool Instance;
+
     [System.Serializable]
     public class Pool
     {
@@ -14,6 +17,18 @@ public class ObjectPool : MonoBehaviour
 
     public List<Pool> pools; // List of different pools
     private Dictionary<string, Queue<GameObject>> poolDictionary;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -29,6 +44,7 @@ public class ObjectPool : MonoBehaviour
                 obj.SetActive(false);
                 obj.transform.SetParent(pool.parent);
                 objectPool.Enqueue(obj);
+                obj.tag = pool.tag;
                 obj.name = pool.tag + " " + i;
                 obj.layer = LayerMask.NameToLayer(pool.tag);
             }

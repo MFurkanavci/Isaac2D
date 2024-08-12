@@ -11,11 +11,8 @@ public class PlayerShooting : MonoBehaviour
     [Header("Shooting")]
     public float fireRate = 0.5f;
     private float fireTimer;
-    public float bulletSpeed = 10f;
-    public float bulletLifetime = 2f;
     
     [Header("Bullet Pooling")]
-    public ObjectPool objectPool;
     public string bulletTag = "Bullet";
 
     Vector2 mousePosition;
@@ -49,18 +46,9 @@ public class PlayerShooting : MonoBehaviour
         Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
 
         // Get bullet object from the pool
-        GameObject bullet = objectPool.GetFromPool(bulletTag, transform.position, Quaternion.identity);
+        GameObject bullet = ObjectPool.Instance.GetFromPool(bulletTag, transform.position, Quaternion.identity);
 
-        // Set bullet velocity
-        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
-
-        // Return bullet to the pool after lifetime expires
-        StartCoroutine(ReturnBullet(bullet, bulletLifetime));
-    }
-
-    private IEnumerator ReturnBullet(GameObject bullet, float lifetime)
-    {
-        yield return new WaitForSeconds(lifetime);
-        objectPool.ReturnToPool(bullet, bulletTag);
+        // Set bullet direction
+        bullet.GetComponent<Bullet>().direction = direction;
     }
 }
