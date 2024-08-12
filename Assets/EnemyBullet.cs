@@ -31,7 +31,7 @@ public class EnemyBullet : MonoBehaviour
     private IEnumerator ReturnToPool()
     {
         yield return new WaitForSeconds(bulletLifetime);
-        gameObject.SetActive(false);
+        ObjectPool.Instance.ReturnToPool(gameObject, gameObject.tag);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
