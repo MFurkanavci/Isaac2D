@@ -8,14 +8,12 @@ public class EnemyWolf : Enemy
     [SerializeField] private float jumpDistance;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float jumpCooldown;
-    private float jumpCooldownTime;
+    [SerializeField] private float jumpCooldownTime;
     private Vector2 jumpDirection;
 
     protected override void Start()
     {
         base.Start();
-
-
         float random = Random.Range(-0.5f, 0.5f);
         jumpCooldown = jumpCooldown * (1 + random);
     }
@@ -47,8 +45,10 @@ public class EnemyWolf : Enemy
 
     private void Jump()
     {
-        rb.velocity = jumpDirection * jumpSpeed;
+        float elapsedTime = 0;
+        rb.velocity = Vector2.Lerp(jumpDirection * jumpSpeed, Vector2.zero, elapsedTime / 10f);
         jumpCooldownTime = Time.time + jumpCooldown;
+        elapsedTime += Time.deltaTime;
     }
 
     private void JumpDirection()
