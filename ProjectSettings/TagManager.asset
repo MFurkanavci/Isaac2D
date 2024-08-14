@@ -9,6 +9,7 @@ TagManager:
   - Loot
   - Bullet
   - EnemyBullet
+  - WolfEnemy
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Loot
   - ShooterEnemy
   - EnemyBullet
-  - 
+  - WolfEnemy
   - 
   - 
   - 
@@ -57,4 +58,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1425822369
+    locked: 0
+  - name: UI
+    uniqueID: 2883243633
     locked: 0
