@@ -23,10 +23,10 @@ public class DoorScript : MonoBehaviour
         {
 
             Room nextRoom = RoomManager.Instance.GetRoomByDoorType(doorType);
-            Debug.Log("you are going to" + nextRoom.name);
+            Debug.Log("you are going to" + nextRoom);
             if (nextRoom == null) return;
-            Debug.Log("you are going to" + nextRoom.name);
-            player.transform.Translate(nextRoom.transform.position);
+            Debug.Log("you are going to" + nextRoom);
+
 
         }
     }
