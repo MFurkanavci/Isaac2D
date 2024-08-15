@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    
+
     [Header("Player Stats")]
-    public int health;
-    public int maxHealth;
+    public float currentHealth;
+    public float maxHealth;
+    public float currentMana;
+    public float maxMana;
+
     public int money;
 
     private void Awake()
@@ -21,17 +25,36 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     private void Start()
     {
-        health = maxHealth;
-    }
+        currentHealth = maxHealth;
+        currentMana = maxMana;
 
+        UIManager.Instance.nextHp = HpPercentage();
+    }
+    public float HpPercentage()
+    {
+        return currentHealth / maxHealth;
+    }
+    float MpPercentage()
+    {
+        return currentMana / maxMana;
+    }
+    public void UseMana(float amount)
+    {
+        if (amount > currentMana) return;
+        currentMana -= amount;
+        UIManager.Instance.nextMp = MpPercentage();
+
+    }
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        currentHealth -= damage;
+        UIManager.Instance.nextHp = HpPercentage();
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -48,11 +71,12 @@ public class Player : MonoBehaviour
 
     public void Heal(int amount)
     {
-        health += amount;
-        if (health > maxHealth)
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
         {
-            health = maxHealth;
+            currentHealth = maxHealth;
         }
+        UIManager.Instance.nextHp = HpPercentage();
     }
 
     public void AddMoney(int amount)

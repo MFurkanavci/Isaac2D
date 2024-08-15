@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class Room: MonoBehaviour
+public class Room //Change : MonoBehaviour
 {
     public RoomType roomType;
     public List<Door> doors = new List<Door>();

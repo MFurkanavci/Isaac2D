@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - EnemyBullet
   - WolfEnemy
+  - SkeletonEnemy
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - ShooterEnemy
   - EnemyBullet
   - WolfEnemy
-  - 
+  - SkeletonEnemy
   - 
   - 
   - 

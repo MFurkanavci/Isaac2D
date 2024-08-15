@@ -17,12 +17,20 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Stats")]
     public float moveSpeed;
     public int health;
+    public int maxHealth;
     public int damage;
+
+
+    protected virtual void OnEnable()
+    {
+        health = maxHealth;
+    }
 
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
+
     }
 
     protected virtual void Update()
@@ -69,5 +77,9 @@ public abstract class Enemy : MonoBehaviour
     public virtual void OnSpawn()
     {
         health = 1;
+    }
+    protected virtual void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }

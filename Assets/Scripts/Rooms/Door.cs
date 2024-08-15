@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class Door: MonoBehaviour
 {
-    public RoomType doortype;
+    public RoomType doorType;
     public Sprite sprite;
 
     private bool isLocked = true;
@@ -22,12 +22,12 @@ public class Door: MonoBehaviour
 
     public RoomType GetDoorType()
     {
-        return doortype;
+        return doorType;
     }
 
     public void SetDoorType(RoomType _type)
     {
-        doortype = _type;
+        doorType = _type;
     }
 
     public void SetSprite(Sprite _sprite)
