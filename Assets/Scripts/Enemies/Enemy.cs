@@ -30,7 +30,7 @@ public abstract class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
-
+        health = maxHealth;
     }
 
     protected virtual void Update()
@@ -55,6 +55,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        EnemySpawner.Instance.RemoveEnemy(gameObject);
         ObjectPool.Instance.ReturnToPool(gameObject, gameObject.tag);
         LootDrop();
     }

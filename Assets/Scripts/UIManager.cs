@@ -25,21 +25,19 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Update()
+    void FixedUpdate()
     {
-        SetHealthToDamage();
+        SetHealth();
         SetMana();
     }
-    public void SetHealthToDamage()
+    public void SetHealth()
     {
 
         hpBar.fillAmount = math.lerp(hpBar.fillAmount, nextHp, lerpSpeed * Time.deltaTime);
     }
-    public void SetMana() 
+    public void SetMana()
     {
         
         mpBar.fillAmount = math.lerp(mpBar.fillAmount,nextMp,lerpSpeed*Time.deltaTime);
     }
-
-
 }

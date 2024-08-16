@@ -1,29 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
-    Dictionary<RoomType, int> roomChances = new Dictionary<RoomType, int>();
     public Room currentRoom;
+    GameObject room;
     public RoomType currentRoomType;
 
     [System.Serializable]
-    public struct Rooms
+    public struct RoomData
     {
         public RoomType roomType;
-        public int weight;
+        public int baseWeight;
+        public int currentWeight;
+        public int maxWeight;
+        public int weightIncrease;
+        public bool canSpawnMultiple;
         public Sprite roomSprite;
+        public GameObject roomPrefab;
     }
 
-    public List<Rooms> chances = new List<Rooms>();
-
-    public static event System.Action OnRoomChange;
+    public List<RoomData> roomDataList = new List<RoomData>();
 
     void Awake()
     {
-       if (Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -33,71 +35,117 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void Start()
+    void Start()
     {
-        foreach(Rooms chance in chances)
-        {
-            roomChances.Add(chance.roomType, chance.weight);
-        }
 
-        GenerateRoom();
     }
 
-    public void ChangeChances(RoomType roomType, int chance)
+    public Room GetCurrentRoom()
     {
-        roomChances[roomType] = chance;
+        return currentRoom;
     }
+
     public void EnterRoom(Room room)
     {
         currentRoom = room;
         currentRoomType = room.roomType;
+
+        ResetRoomWeights();
+
+        DoorManager.Instance.GenerateDoors();
+
     }
 
     public void ExitRoom()
     {
+        
+        Destroy(currentRoom.gameObject);
         currentRoom = null;
+        room = null;
     }
-    public void GenerateRoom()
-    {
-        RoomType roomType = GetRoomType();
-        Room room = new Room();
-        room.SetRoomType(roomType);
 
-        print("Selected Room: " + room.roomType);
+    public void GenerateRoom(RoomType roomType)
+    {
+        RoomType newRoomType = roomType;
+
+        foreach (RoomData data in roomDataList)
+        {
+            if (data.roomType == newRoomType)
+            {
+                GameObject room = Instantiate(data.roomPrefab, transform.position, Quaternion.identity);
+                Room roomComponent = room.GetComponent<Room>();
+                roomComponent.SetRoomType(newRoomType);
+                this.room = room;
+                EnterRoom(roomComponent);
+            }
+        }
     }
 
     public RoomType GetRoomType()
     {
-        //pick a room type based on their weight
-        int totalWeight = 0;
-        foreach (Rooms chance in chances)
+        if (roomDataList.Count == 0)
         {
-            totalWeight += chance.weight;
+            Debug.LogWarning("No rooms configured in the RoomManager.");
+            return RoomType.StartRoom;
         }
+        int totalWeight = 0;
+        foreach (RoomData data in roomDataList)
+        {
+            totalWeight += data.currentWeight;
+        }
+
         int random = Random.Range(0, totalWeight);
         int currentWeight = 0;
-        foreach (Rooms chance in chances)
+        foreach (RoomData data in roomDataList)
         {
-            currentWeight += chance.weight;
-            if (random <= currentWeight)
+            currentWeight += data.currentWeight;
+            if (random < currentWeight)
             {
-                return chance.roomType;
+                if (data.canSpawnMultiple || !data.roomType.Equals(currentRoomType))
+                {
+                    return data.roomType;
+                }
             }
         }
 
         return RoomType.StartRoom;
     }
 
-    public Sprite GetSprite(RoomType _type)
+    private void ResetRoomWeights()
     {
-        foreach (Rooms chance in chances)
+        List<RoomData> updatedRoomDataList = new List<RoomData>();
+        
+        foreach (RoomData data in roomDataList)
         {
-            if(chance.roomType == _type)
+            RoomData updatedData = data;
+        
+            if (data.roomType.Equals(currentRoomType))
             {
-                return chance.roomSprite;
+                // Reset weight to original value for the room type
+                updatedData.currentWeight = updatedData.baseWeight;
+            }
+            else
+            {
+                updatedData.currentWeight = Mathf.Min(updatedData.currentWeight + updatedData.weightIncrease, updatedData.maxWeight);
+            }
+        
+            updatedRoomDataList.Add(updatedData);
+        }
+        
+        roomDataList = updatedRoomDataList;
+    }
+
+    public Sprite GetSprite(RoomType roomType)
+    {
+        foreach (RoomData data in roomDataList)
+        {
+            if (data.roomType == roomType)
+            {
+                return data.roomSprite;
             }
         }
+
+        Debug.LogWarning("Room sprite not found for type: " + roomType);
         return null;
     }
-    
 }

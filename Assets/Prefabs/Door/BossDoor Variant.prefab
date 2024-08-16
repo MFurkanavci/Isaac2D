@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: doorType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 823631343121926588, guid: 76fc0bfc47a021b4da508139b237bf04, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1198808430914389600, guid: 76fc0bfc47a021b4da508139b237bf04, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
-public class Door: MonoBehaviour
+public class Door : MonoBehaviour
 {
     public RoomType doorType;
     public Sprite sprite;
 
-    private bool isLocked = true;
+    public bool isLocked = true;
 
     public void OpenDoor()
     {
@@ -27,18 +24,51 @@ public class Door: MonoBehaviour
 
     public void SetDoorType(RoomType _type)
     {
+        CloseDoor();
         doorType = _type;
     }
 
     public void SetSprite(Sprite _sprite)
     {
         sprite = _sprite;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = sprite;
+        SpriteRenderer spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = sprite;
+        }
     }
 
     void OnDisable()
     {
-        CloseDoor();
         SetSprite(null);
+    }
+
+    void OnEnable()
+    {
+        gameObject.GetComponent<Collider2D>().enabled = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.TryGetComponent<Player>(out Player player))
+        {
+            if (!isLocked)
+            {
+                RoomManager.Instance.ExitRoom();
+                print(GetDoorType() + " door entered");
+                RoomManager.Instance.GenerateRoom(GetDoorType());
+                print(RoomManager.Instance.GetCurrentRoom() + " room generated");
+                
+                if (RoomManager.Instance.GetCurrentRoom().roomType == RoomType.CombatRoom)
+                {
+                    EnemySpawner.Instance.StartSpawning();
+                }
+
+                isLocked = true;
+
+                player.transform.position = Vector3.zero;
+                
+            }
+        }
     }
 }

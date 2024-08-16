@@ -17,15 +17,12 @@ public class Bullet : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-
-        // Reset bullet position
         transform.position = Vector2.zero;
-        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
     void Update()
     {
-        transform.Translate(direction * bulletSpeed * Time.deltaTime);
+        transform.position += (Vector3)direction * bulletSpeed * Time.deltaTime;
     }
 
     private IEnumerator ReturnToPool()

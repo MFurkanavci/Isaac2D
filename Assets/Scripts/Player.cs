@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -30,6 +31,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        //fps limiter
+        Application.targetFrameRate = 60;
+
         currentHealth = maxHealth;
         currentMana = maxMana;
 
@@ -48,7 +52,6 @@ public class Player : MonoBehaviour
         if (amount > currentMana) return;
         currentMana -= amount;
         UIManager.Instance.nextMp = MpPercentage();
-
     }
     public void TakeDamage(int damage)
     {
@@ -67,6 +70,8 @@ public class Player : MonoBehaviour
         //reset player position
         //reset player health
         //reset player money
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Heal(int amount)
@@ -91,5 +96,15 @@ public class Player : MonoBehaviour
         {
             money = 0;
         }
+    }
+
+    public void AddMana(int amount)
+    {
+        currentMana += amount;
+        if (currentMana > maxMana)
+        {
+            currentMana = maxMana;
+        }
+        UIManager.Instance.nextMp = MpPercentage();
     }
 }

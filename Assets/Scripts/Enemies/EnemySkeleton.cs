@@ -1,21 +1,18 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class EnemySkeleton : Enemy
 {
     [Header("Skeleton Enemy")]
-    [SerializeField] float deathTime;
+    [SerializeField] float reConstructTime;
     [SerializeField] GameObject skeleton;
     [SerializeField] Collider2D skeletonCollider;
-    [SerializeField] GameObject bonePill;
+    [SerializeField] GameObject bonePile;
     [SerializeField] Collider2D bonePillCollider;
 
 
 
-    private bool isDead = false;
+    private bool inSecondPhase = false;
 
     private float moveSpeedFirst;
 
@@ -23,7 +20,7 @@ public class EnemySkeleton : Enemy
     protected override void Start()
     {
         skeleton.SetActive(true);
-        bonePill.SetActive(false);
+        bonePile.SetActive(false);
         bonePillCollider.enabled = false;
         skeletonCollider.enabled = true;
         base.Start();
@@ -31,63 +28,59 @@ public class EnemySkeleton : Enemy
 
 
     }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
     protected override void Move()
     {
+        if (inSecondPhase)
+        {
+            moveSpeed = 0;
+        }
+
         base.Move();
     }
 
     public override void TakeDamage(int damage)
     {
-        if (isDead)
+        if(health - damage <= 0 && !inSecondPhase)
         {
-            StopAllCoroutines();
+            health = 1;
         }
-        base.TakeDamage(damage);
-    }
-
-    protected override void Die()
-    {
-        if (isDead)
+        if(inSecondPhase)
         {
-            base.Die();
+            health = 0;
         }
-        if (!isDead)
+        if(health <= maxHealth / 2 + 1 && !inSecondPhase)
         {
-            moveSpeed = 0;
-            isDead = true;
-            skeleton.SetActive(false);
-            bonePill.SetActive(true);
-            bonePillCollider.enabled = true;
-            skeletonCollider.enabled = false;
-            StartCoroutine(ReviveCountdown());
+            inSecondPhase = true;
+            StartCoroutine(ReConstruct());
         }
-    }
 
-    private IEnumerator ReviveCountdown()
-    {
-        yield return new WaitForSeconds(deathTime);
-
-        if (isDead)
+        if (!inSecondPhase)
         {
-            skeleton.SetActive(true);
-            bonePill.SetActive(false);
-            health = maxHealth;
-            bonePillCollider.enabled = false;
-            skeletonCollider.enabled = true;
-            
-            moveSpeed = moveSpeedFirst;
-            isDead = false;
+            base.TakeDamage(damage);
+        }
+        else
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                base.Die();
+            }
         }
     }
-
-    protected override void OnTriggerEnter2D(Collider2D other)
+    IEnumerator ReConstruct()
     {
-        base.OnTriggerEnter2D(other);
+        inSecondPhase = true;
+        skeleton.SetActive(false);
+        bonePile.SetActive(true);
+        bonePillCollider.enabled = true;
+        skeletonCollider.enabled = false;
+        yield return new WaitForSeconds(reConstructTime);
+        inSecondPhase = false;
+        skeleton.SetActive(true);
+        bonePile.SetActive(false);
+        bonePillCollider.enabled = false;
+        skeletonCollider.enabled = true;
+        moveSpeed = moveSpeedFirst;
+        health = maxHealth;
     }
 }

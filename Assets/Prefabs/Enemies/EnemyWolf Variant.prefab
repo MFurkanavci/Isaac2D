@@ -119,10 +119,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTag: Loot
-  lootDropChance: 0
+  lootDropChance: 0.6
   moveSpeed: 1
   health: 1
+  maxHealth: 0
   damage: 1
   jumpDistance: 3
   jumpSpeed: 5
   jumpCooldown: 3
+  jumpCooldownTime: 0

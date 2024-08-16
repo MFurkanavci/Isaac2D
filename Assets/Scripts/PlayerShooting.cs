@@ -23,16 +23,19 @@ public class PlayerShooting : MonoBehaviour
         fireTimer = fireRate;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // Handle shooting input
+        // Shoot when left mouse button is pressed or held down(be sure both conditions are the same)
         if (Input.GetMouseButton(0))
         {
-            fireTimer += Time.deltaTime;
-            if (fireTimer >= fireRate)
+            if (fireTimer <= 0)
             {
                 Shoot();
-                fireTimer = 0;
+                fireTimer = fireRate;
+            }
+            else
+            {
+                fireTimer -= Time.deltaTime;
             }
         }
     }

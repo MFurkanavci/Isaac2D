@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
+    
     [Header("Enemy Pooling")]
     public List<string> enemyTags;
 
@@ -20,32 +22,57 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRate;
     private float nextSpawnTime;
 
-    private void Start()
+    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
+
+    private bool isSpawning = false;
+
+    private void Awake()
     {
-        //We will get the room size and spawn point
-        player = GameObject.Find("Player").GetComponent<Player>();
-        roomSize = Room.GetComponent<SpriteRenderer>().bounds.size;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        
+        currentEnemies = totalEnemies;
     }
     private void Update()
     {
-        if (currentEnemies <= 0)
+        if (isSpawning)
         {
-            gameObject.SetActive(false);
-        }
-        if (Time.time >= nextSpawnTime)
-        {
-            SpawnGroup();
+            if (Time.time >= nextSpawnTime && currentEnemies > 0)
+            {
+                SpawnGroup();
+            }
+            if (currentEnemies <= 0 && enemies.Count <= 0)
+            {
+                CleanUp();
+                DoorManager.Instance.OpenDoors();
+            }
         }
     }
 
-    void OnDisable()
+    public void StartSpawning()
     {
+        
         currentEnemies = totalEnemies;
+        DoorManager.Instance.CloseDoors();
+        player = GameObject.Find("Player").GetComponent<Player>();
+        Room = RoomManager.Instance.currentRoom.gameObject;
+        roomSize = Room.GetComponent<SpriteRenderer>().bounds.size;
+        nextSpawnTime = Time.time + spawnRate;
+
+        isSpawning = true;
     }
 
-    void OnEnable()
+    public void CleanUp()
     {
-        nextSpawnTime = Time.time + spawnRate;
+        currentEnemies = 0;
+        isSpawning = false;
     }
 
     private void SpawnGroup()
@@ -77,8 +104,17 @@ public class EnemySpawner : MonoBehaviour
         {
             string enemyTag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Count)];
             Vector3 spawnPosition = _spawnPoint + UnityEngine.Random.insideUnitSphere * radius;
-            ObjectPool.Instance.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
+            GameObject _enmy = ObjectPool.Instance.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
+            enemies.Add(_enmy);
             currentEnemies--;
+        }
+    }
+
+    public void RemoveEnemy(GameObject enemy)
+    {
+        if (enemies.Contains(enemy))
+        {
+            enemies.Remove(enemy);
         }
     }
 
