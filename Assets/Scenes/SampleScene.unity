@@ -689,6 +689,14 @@ MonoBehaviour:
     prefab: {fileID: 3110914712038546469, guid: d1be669b96b7d354bbd29c2eb14a87bd, type: 3}
     poolSize: 50
     parent: {fileID: 173397255}
+  - tag: RockGolem
+    prefab: {fileID: 1506919092292867927, guid: d711fed810744614f8e2c864e07ec846, type: 3}
+    poolSize: 100
+    parent: {fileID: 173397255}
+  - tag: EnemyEmp
+    prefab: {fileID: 5100177181560481740, guid: 80e32a67df3edec4391b6f40357c93f8, type: 3}
+    poolSize: 100
+    parent: {fileID: 173397255}
   - tag: WolfEnemy
     prefab: {fileID: 7384419503234242531, guid: c569e93dfbb90ff4faf15523e8f94957, type: 3}
     poolSize: 50
@@ -1683,6 +1691,8 @@ MonoBehaviour:
   - ShooterEnemy
   - SkeletonEnemy
   - WolfEnemy
+  - RockGolem
+  - EnemyEmp
   Room: {fileID: 0}
   distanceFromPlayer: 5
   totalEnemies: 1
@@ -3220,7 +3230,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

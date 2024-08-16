@@ -11,6 +11,8 @@ TagManager:
   - EnemyBullet
   - WolfEnemy
   - SkeletonEnemy
+  - RockGolem
+  - EnemyEmp
   layers:
   - Default
   - TransparentFX
@@ -26,8 +28,8 @@ TagManager:
   - EnemyBullet
   - WolfEnemy
   - SkeletonEnemy
-  - 
-  - 
+  - RockGolem
+  - EnemyEmp
   - 
   - 
   - 
