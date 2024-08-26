@@ -679,26 +679,30 @@ MonoBehaviour:
   pools:
   - tag: BasicEnemy
     prefab: {fileID: 7137807519583773608, guid: 46b40bf4c3396ac4fbf0f19dd751496b, type: 3}
-    poolSize: 50
+    poolSize: 15
     parent: {fileID: 173397255}
   - tag: SkeletonEnemy
     prefab: {fileID: 8919299726167930790, guid: dcb904ad005a32a47a14c0ee5c26c1e2, type: 3}
-    poolSize: 50
+    poolSize: 15
     parent: {fileID: 173397255}
   - tag: ShooterEnemy
-    prefab: {fileID: 3110914712038546469, guid: d1be669b96b7d354bbd29c2eb14a87bd, type: 3}
-    poolSize: 50
+    prefab: {fileID: 3808409474771706611, guid: 0b9eb15cde72a554fa2f040dbb26f1bd, type: 3}
+    poolSize: 15
     parent: {fileID: 173397255}
-  - tag: RockGolem
-    prefab: {fileID: 1506919092292867927, guid: d711fed810744614f8e2c864e07ec846, type: 3}
-    poolSize: 100
+  - tag: GolemEnemy
+    prefab: {fileID: 8168392469557244850, guid: d711fed810744614f8e2c864e07ec846, type: 3}
+    poolSize: 15
     parent: {fileID: 173397255}
-  - tag: EnemyEmp
-    prefab: {fileID: 5100177181560481740, guid: 80e32a67df3edec4391b6f40357c93f8, type: 3}
-    poolSize: 100
+  - tag: ImpEnemy
+    prefab: {fileID: 4669330202335403620, guid: 80e32a67df3edec4391b6f40357c93f8, type: 3}
+    poolSize: 15
+    parent: {fileID: 173397255}
+  - tag: LaserEnemy
+    prefab: {fileID: 8156867514198684285, guid: ada7ab060f3285c41b7d85c320ca555f, type: 3}
+    poolSize: 15
     parent: {fileID: 173397255}
   - tag: WolfEnemy
-    prefab: {fileID: 7384419503234242531, guid: c569e93dfbb90ff4faf15523e8f94957, type: 3}
+    prefab: {fileID: 443221875207990999, guid: c569e93dfbb90ff4faf15523e8f94957, type: 3}
     poolSize: 50
     parent: {fileID: 1975938543}
   - tag: Loot
@@ -1690,6 +1694,7 @@ MonoBehaviour:
   - BasicEnemy
   - ShooterEnemy
   - SkeletonEnemy
+  - LaserEnemy
   - WolfEnemy
   - RockGolem
   - EnemyEmp

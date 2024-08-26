@@ -11,9 +11,9 @@ TagManager:
   - EnemyBullet
   - WolfEnemy
   - SkeletonEnemy
-  - RockGolem
-  - EnemyEmp
   - LaserEnemy
+  - GolemEnemy
+  - ImpEnemy
   layers:
   - Default
   - TransparentFX

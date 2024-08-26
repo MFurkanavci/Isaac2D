@@ -42,6 +42,7 @@ public abstract class Enemy : MonoBehaviour
     {
         moveDirection = (player.position - transform.position).normalized * moveSpeed;
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
+        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = !(moveDirection.x > 0);
     }
 
     public virtual void TakeDamage(int damage)
