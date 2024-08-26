@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBullet Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2351403269480200642, guid: cdcc1fc94901db547bfcf20a5ff2ed1c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2480483699887715873, guid: cdcc1fc94901db547bfcf20a5ff2ed1c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

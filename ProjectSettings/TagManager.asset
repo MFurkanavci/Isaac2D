@@ -13,6 +13,7 @@ TagManager:
   - SkeletonEnemy
   - RockGolem
   - EnemyEmp
+  - LaserEnemy
   layers:
   - Default
   - TransparentFX
@@ -21,15 +22,15 @@ TagManager:
   - Water
   - UI
   - Player
-  - BasicEnemy
+  - Enemy
   - Bullet
   - Loot
-  - ShooterEnemy
   - EnemyBullet
-  - WolfEnemy
-  - SkeletonEnemy
-  - RockGolem
-  - EnemyEmp
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

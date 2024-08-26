@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7137807519583773608, guid: 46b40bf4c3396ac4fbf0f19dd751496b, type: 3}
       propertyPath: m_TagString
-      value: EnemyEmp
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7953245477192075589, guid: 46b40bf4c3396ac4fbf0f19dd751496b, type: 3}
       propertyPath: m_LocalScale.x
@@ -131,5 +131,5 @@ MonoBehaviour:
   fireRate: 1
   minX: -8.5
   maxX: 8.5
-  minY: 4.5
+  minY: -4.5
   maxY: 4.5

@@ -46,7 +46,6 @@ public class ObjectPool : MonoBehaviour
                 objectPool.Enqueue(obj);
                 obj.tag = pool.tag;
                 obj.name = pool.tag + " " + i;
-                obj.layer = LayerMask.NameToLayer(pool.tag);
             }
 
             poolDictionary.Add(pool.tag, objectPool);

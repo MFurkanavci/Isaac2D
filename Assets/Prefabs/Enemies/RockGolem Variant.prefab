@@ -58,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7137807519583773608, guid: 46b40bf4c3396ac4fbf0f19dd751496b, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7137807519583773608, guid: 46b40bf4c3396ac4fbf0f19dd751496b, type: 3}
       propertyPath: m_TagString
-      value: RockGolem
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7953245477192075589, guid: 46b40bf4c3396ac4fbf0f19dd751496b, type: 3}
       propertyPath: m_LocalScale.x

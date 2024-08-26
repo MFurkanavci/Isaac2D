@@ -643,7 +643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 5
+  maxHealth: 60
   currentMana: 0
   maxMana: 0
   money: 0
@@ -947,7 +947,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16359
+    m_Bits: 65511
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1695,7 +1695,7 @@ MonoBehaviour:
   - EnemyEmp
   Room: {fileID: 0}
   distanceFromPlayer: 5
-  totalEnemies: 1
+  totalEnemies: 15
   currentEnemies: 0
   spawnRate: 0.1
   enemies: []

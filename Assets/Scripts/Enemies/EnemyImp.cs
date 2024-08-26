@@ -8,13 +8,14 @@ public class EnemyImp : Enemy
 
     [Header("Shooter Enemy")]
     public float fireRate;
-    private float nextFireTime = -2;
+    private float nextFireTime = 2;
     private float teleportCooldown = 5f;
     public float minX, maxX, minY, maxY;
     private float nextTeleportTime;
 
     protected override void Start()
     {
+
         float random = Random.Range(-0.5f, 0.5f);
         fireRate += random;
         base.Start();
