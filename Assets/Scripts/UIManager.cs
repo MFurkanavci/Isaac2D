@@ -10,8 +10,11 @@ public class UIManager : MonoBehaviour
     [Header("BarUI")]
     public Image hpBar;
     public Image mpBar;
+    public Image expBarL, expBarR;
+
     public float nextHp;
     public float nextMp;
+    public float nextExp;
 
     public float lerpSpeed = 4f;
     private void Awake()
@@ -29,6 +32,7 @@ public class UIManager : MonoBehaviour
     {
         SetHealth();
         SetMana();
+        SetExp();
     }
     public void SetHealth()
     {
@@ -37,7 +41,13 @@ public class UIManager : MonoBehaviour
     }
     public void SetMana()
     {
-        
-        mpBar.fillAmount = math.lerp(mpBar.fillAmount,nextMp,lerpSpeed*Time.deltaTime);
+
+        mpBar.fillAmount = math.lerp(mpBar.fillAmount, nextMp, lerpSpeed * Time.deltaTime);
+    }
+    public void SetExp()
+    {
+        expBarL.fillAmount = math.lerp(expBarL.fillAmount, nextExp, lerpSpeed * Time.deltaTime);
+        expBarR.fillAmount = math.lerp(expBarR.fillAmount, nextExp, lerpSpeed * Time.deltaTime);
+
     }
 }

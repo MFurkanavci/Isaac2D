@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     public int experience;
     public int tempExperience;
+    public int experianceToNextLevel = 100;
+    float percentageExp;
 
     public int level;
 
@@ -51,6 +53,10 @@ public class Player : MonoBehaviour
     float MpPercentage()
     {
         return currentMana / maxMana;
+    }
+    public float ExpPercentage()
+    {
+        return (float)experience/(float)experianceToNextLevel;
     }
     public void UseMana(float amount)
     {
@@ -116,18 +122,21 @@ public class Player : MonoBehaviour
     public void AddExperience(int amount)
     {
         experience += amount;
-
-        if (experience >= 100 + level * 10)
+        if (experience >= experianceToNextLevel)
         {
             LevelUp();
         }
+        UIManager.Instance.nextExp = ExpPercentage();
     }
 
     public void LevelUp()
     {
         //TODO: Implement level up
         print("Ding!");
-        experience -= 100 + level * 10 ;
+        experianceToNextLevel = 100 + level * 10;
+        experience -= experianceToNextLevel;
         level++;
+        
+
     }
 }
