@@ -84,6 +84,18 @@ public class DoorManager : MonoBehaviour
         {
             door.OpenDoor();
         }
+
+        HandleManager();
+    }
+    public void HandleManager()
+    {
+        EnemySpawner.Instance.totalEnemies += EnemySpawner.Instance.totalIncrease;
+    }
+
+    public void HandleExperience()
+    {
+        Player.Instance.tempExperience = RoomManager.Instance.GetRoomExperience();
+        Player.Instance.AddExperience(Player.Instance.tempExperience);
     }
 
     public void CloseDoors()

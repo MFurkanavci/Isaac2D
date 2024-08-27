@@ -7,6 +7,7 @@ public class RoomManager : MonoBehaviour
     public Room currentRoom;
     GameObject room;
     public RoomType currentRoomType;
+    private int roomExperience;
 
     [System.Serializable]
     public struct RoomData
@@ -54,6 +55,13 @@ public class RoomManager : MonoBehaviour
 
         DoorManager.Instance.GenerateDoors();
 
+        roomExperience = EnemySpawner.Instance.totalEnemies;
+
+    }
+
+    public int GetRoomExperience()
+    {
+        return roomExperience;
     }
 
     public void ExitRoom()

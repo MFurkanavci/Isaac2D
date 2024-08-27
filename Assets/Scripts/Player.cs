@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
 
     public int money;
 
+    public int experience;
+    public int tempExperience;
+
+    public int level;
+
     private void Awake()
     {
         if (Instance == null)
@@ -106,5 +111,23 @@ public class Player : MonoBehaviour
             currentMana = maxMana;
         }
         UIManager.Instance.nextMp = MpPercentage();
+    }
+
+    public void AddExperience(int amount)
+    {
+        experience += amount;
+
+        if (experience >= 100 + level * 10)
+        {
+            LevelUp();
+        }
+    }
+
+    public void LevelUp()
+    {
+        //TODO: Implement level up
+        print("Ding!");
+        experience -= 100 + level * 10 ;
+        level++;
     }
 }

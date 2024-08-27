@@ -66,7 +66,7 @@ public class Door : MonoBehaviour
 
                 isLocked = true;
 
-                player.transform.position = Vector3.zero;
+                player.transform.position = new Vector3(player.transform.position.x, -player.transform.position.y, player.transform.position.z);
                 
             }
         }
