@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private Vector3 spawnPoint;
     public float distanceFromPlayer;
     public int totalEnemies;
+    public int totalIncrease;
     public int currentEnemies;
     public float spawnRate;
     private float nextSpawnTime;
@@ -52,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 CleanUp();
                 DoorManager.Instance.OpenDoors();
+                DoorManager.Instance.HandleExperience();
             }
         }
     }

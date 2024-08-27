@@ -178,9 +178,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7748890241133032700}
   - component: {fileID: 3784910536064180837}
-  - component: {fileID: 8009494201652127686}
   - component: {fileID: 2655342720587143144}
   - component: {fileID: 2019582619093931877}
+  - component: {fileID: 8009494201652127686}
   m_Layer: 7
   m_Name: SkeleyonEnemy
   m_TagString: SkeletonEnemy
@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 8919299726167930790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.0250106, y: 1.5037394, z: 0.58334106}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -232,29 +232,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8009494201652127686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8919299726167930790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29713ebb0130ed843915c66605eec35f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lootTag: Loot
-  lootDropChance: 0.75
-  moveSpeed: 2
-  health: 5
-  maxHealth: 5
-  damage: 1
-  reConstructTime: 2
-  skeleton: {fileID: 8391490677186163326}
-  skeletonCollider: {fileID: 2655342720587143144}
-  bonePile: {fileID: 8141360768478832998}
-  bonePillCollider: {fileID: 2019582619093931877}
 --- !u!61 &2655342720587143144
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -345,3 +322,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.47770834, y: 0.36229503}
   m_EdgeRadius: 0
+--- !u!114 &8009494201652127686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919299726167930790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29713ebb0130ed843915c66605eec35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTag: Loot
+  lootDropChance: 0.75
+  moveSpeed: 3
+  health: 5
+  maxHealth: 5
+  damage: 1
+  reConstructTime: 2
+  skeleton: {fileID: 8391490677186163326}
+  skeletonCollider: {fileID: 2655342720587143144}
+  bonePile: {fileID: 8141360768478832998}
+  bonePillCollider: {fileID: 2019582619093931877}

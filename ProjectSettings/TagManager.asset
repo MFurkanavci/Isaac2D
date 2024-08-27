@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BasicEnemy
   - ShooterEnemy
   - Loot
   - Bullet
@@ -14,6 +13,7 @@ TagManager:
   - LaserEnemy
   - GolemEnemy
   - ImpEnemy
+  - GoblinEnemy
   layers:
   - Default
   - TransparentFX

@@ -14,12 +14,12 @@ public class EnemyLaser : Enemy
     public float previewDuration = 1f;
     public float nextFireTime = 2f;
     public float laserCooldown = 5f;
-    public float rotationSpeed = 5f; 
+    public float rotationSpeed = 5f;
     bool isAttack = false;
 
     protected override void Start()
     {
-        float random = UnityEngine.Random.Range(-0.25f, 0.25f);
+        float random = UnityEngine.Random.Range(-1f, 1f);
         nextFireTime += random;
         laser.SetActive(false);
         laserPreviewPrefab.SetActive(false);
@@ -80,7 +80,6 @@ public class EnemyLaser : Enemy
     }
     IEnumerator AttackLaserEnemy()
     {
-
         PreviewLaserToLaser();
         yield return new WaitForSeconds(1f);
         ShootLaser();

@@ -628,7 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aaa887f03c502349bb62fd4d1ca1d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.5
+  fireRate: 0.01
   bulletTag: Bullet
 --- !u!114 &255170425
 MonoBehaviour:
@@ -647,6 +647,9 @@ MonoBehaviour:
   currentMana: 0
   maxMana: 0
   money: 0
+  experience: 0
+  tempExperience: 0
+  level: 1
 --- !u!1 &318910518
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,33 +680,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: BasicEnemy
+  - tag: GoblinEnemy
     prefab: {fileID: 7137807519583773608, guid: 46b40bf4c3396ac4fbf0f19dd751496b, type: 3}
-    poolSize: 15
+    poolSize: 20
     parent: {fileID: 173397255}
   - tag: SkeletonEnemy
     prefab: {fileID: 8919299726167930790, guid: dcb904ad005a32a47a14c0ee5c26c1e2, type: 3}
-    poolSize: 15
+    poolSize: 20
     parent: {fileID: 173397255}
   - tag: ShooterEnemy
     prefab: {fileID: 3808409474771706611, guid: 0b9eb15cde72a554fa2f040dbb26f1bd, type: 3}
-    poolSize: 15
+    poolSize: 20
     parent: {fileID: 173397255}
   - tag: GolemEnemy
     prefab: {fileID: 8168392469557244850, guid: d711fed810744614f8e2c864e07ec846, type: 3}
-    poolSize: 15
+    poolSize: 20
     parent: {fileID: 173397255}
   - tag: ImpEnemy
     prefab: {fileID: 4669330202335403620, guid: 80e32a67df3edec4391b6f40357c93f8, type: 3}
-    poolSize: 15
+    poolSize: 20
     parent: {fileID: 173397255}
   - tag: LaserEnemy
     prefab: {fileID: 8156867514198684285, guid: ada7ab060f3285c41b7d85c320ca555f, type: 3}
-    poolSize: 15
+    poolSize: 20
     parent: {fileID: 173397255}
   - tag: WolfEnemy
     prefab: {fileID: 443221875207990999, guid: c569e93dfbb90ff4faf15523e8f94957, type: 3}
-    poolSize: 50
+    poolSize: 20
     parent: {fileID: 1975938543}
   - tag: Loot
     prefab: {fileID: 4357721241290767108, guid: ae021347216093e439118232d7e0a9d5, type: 3}
@@ -1691,18 +1694,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTags:
-  - BasicEnemy
+  - GoblinEnemy
   - ShooterEnemy
   - SkeletonEnemy
   - LaserEnemy
   - WolfEnemy
-  - RockGolem
-  - EnemyEmp
+  - GolemEnemy
+  - ImpEnemy
   Room: {fileID: 0}
   distanceFromPlayer: 5
-  totalEnemies: 15
+  totalEnemies: 5
+  totalIncrease: 2
   currentEnemies: 0
-  spawnRate: 0.1
+  spawnRate: 0.5
   enemies: []
 --- !u!4 &1240042411
 Transform:
