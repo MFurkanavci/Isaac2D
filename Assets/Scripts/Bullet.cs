@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public float damage;
     public float bulletSpeed = 10f;
     public float bulletLifetime = 2f;
 
@@ -18,6 +19,13 @@ public class Bullet : MonoBehaviour
     {
         StopAllCoroutines();
         transform.position = Vector2.zero;
+    }
+
+    public void InitializeBullet(float damage, float range, float speed)
+    {
+        this.damage = damage;
+        bulletLifetime = range;
+        bulletSpeed = speed;
     }
 
     void Update()

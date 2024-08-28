@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
+    public HeroSO hero;
+
     [Header("Player Stats")]
     public float currentHealth;
     public float maxHealth;
@@ -36,15 +38,28 @@ public class Player : MonoBehaviour
 
     }
 
+    public void InıtializePlayerStats(HeroSO hero)
+    {
+        this.hero = hero;
+        maxHealth = hero.maxHealth;
+        currentHealth = maxHealth;
+        maxMana = hero.maxMana;
+        currentMana = maxMana;
+        level = 1;
+        experience = 0;
+        experianceToNextLevel = 100;
+        money = 0;
+
+        UIManager.Instance.nextHp = HpPercentage();
+
+        gameObject.GetComponent<PlayerMovement>().InitializePlayerMovement(hero);
+        gameObject.GetComponent<PlayerShooting>().InitializePlayerShooting(hero);
+    }
+
     private void Start()
     {
         //fps limiter
         Application.targetFrameRate = 60;
-
-        currentHealth = maxHealth;
-        currentMana = maxMana;
-
-        UIManager.Instance.nextHp = HpPercentage();
     }
     public float HpPercentage()
     {
@@ -68,6 +83,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         UIManager.Instance.nextHp = HpPercentage();
+        ScreenHandling.instance.ShakeScreen();
         if (currentHealth <= 0)
         {
             Die();

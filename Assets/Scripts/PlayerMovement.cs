@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private HeroSO hero;
     [Header("Player Components")]
     public Rigidbody2D rb;
 
@@ -20,6 +21,15 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void InitializePlayerMovement(HeroSO hero)
+    {
+        this.hero = hero;
+        moveSpeed = hero.moveSpeed;
+        rollSpeed = hero.rollSpeed;
+        rollDuration = hero.rollDuration;
+        rollCooldown = hero.rollCooldown;
     }
 
     void Update()
