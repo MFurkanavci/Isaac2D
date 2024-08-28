@@ -1,13 +1,16 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
+    public TextMeshProUGUI keyAmountText;
     public Room currentRoom;
     GameObject room;
     public RoomType currentRoomType;
     private int roomExperience;
+    private int keyAmount = 15;
 
     [System.Serializable]
     public struct RoomData
@@ -38,7 +41,17 @@ public class RoomManager : MonoBehaviour
 
     void Start()
     {
-
+        keyAmountText.text = keyAmount.ToString();
+    }
+    public void UseKey()
+    {
+        keyAmount -= 1;
+        keyAmountText.text = keyAmount.ToString();
+    }
+    public void IncreaseKey(int key)
+    {
+        keyAmount += key;
+        keyAmountText.text = keyAmount.ToString();
     }
 
     public Room GetCurrentRoom()
@@ -48,6 +61,7 @@ public class RoomManager : MonoBehaviour
 
     public void EnterRoom(Room room)
     {
+
         currentRoom = room;
         currentRoomType = room.roomType;
 
@@ -66,7 +80,7 @@ public class RoomManager : MonoBehaviour
 
     public void ExitRoom()
     {
-        
+
         Destroy(currentRoom.gameObject);
         currentRoom = null;
         room = null;
@@ -122,11 +136,11 @@ public class RoomManager : MonoBehaviour
     private void ResetRoomWeights()
     {
         List<RoomData> updatedRoomDataList = new List<RoomData>();
-        
+
         foreach (RoomData data in roomDataList)
         {
             RoomData updatedData = data;
-        
+
             if (data.roomType.Equals(currentRoomType))
             {
                 // Reset weight to original value for the room type
@@ -136,10 +150,10 @@ public class RoomManager : MonoBehaviour
             {
                 updatedData.currentWeight = Mathf.Min(updatedData.currentWeight + updatedData.weightIncrease, updatedData.maxWeight);
             }
-        
+
             updatedRoomDataList.Add(updatedData);
         }
-        
+
         roomDataList = updatedRoomDataList;
     }
 

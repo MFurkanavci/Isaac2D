@@ -54,6 +54,7 @@ public class Door : MonoBehaviour
         {
             if (!isLocked)
             {
+                RoomManager.Instance.UseKey();
                 RoomManager.Instance.ExitRoom();
                 print(GetDoorType() + " door entered");
                 RoomManager.Instance.GenerateRoom(GetDoorType());
