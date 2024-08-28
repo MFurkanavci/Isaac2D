@@ -24,3 +24,4 @@ MonoBehaviour:
   attackSpeed: 0.2
   attackDamage: 1
   attackRange: 1
+  bulletSpeed: 20
