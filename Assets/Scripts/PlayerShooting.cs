@@ -20,6 +20,7 @@ public class PlayerShooting : MonoBehaviour
 
     Vector2 mousePosition;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,6 +48,14 @@ public class PlayerShooting : MonoBehaviour
                 fireTimer -= Time.deltaTime;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SpecialAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UltimateAttack();
+        }
     }
 
     private void Shoot()
@@ -63,5 +72,53 @@ public class PlayerShooting : MonoBehaviour
 
         // Set bullet direction
         bullet.GetComponent<Bullet>().direction = direction;
+
+        CycleAttacks();
+    }
+
+    public void BoolAnim(string boolName = "", bool value = false)
+    {
+        Player.Instance.anim.SetBool(boolName, value);
+    }
+
+    public void TriggerAnim(string triggerName = "")
+    {
+        Player.Instance.anim.SetTrigger(triggerName);
+    }
+
+    public void SetFloatAnim(string floatName = "", float value = 0)
+    {
+        Player.Instance.anim.SetFloat(floatName, value);
+    }
+
+    public void SetIntAnim(string intName = "", int value = 0)
+    {
+        Player.Instance.anim.SetInteger(intName, value);
+    }
+
+    bool firstAttack = false;
+
+    public void CycleAttacks()
+    {
+        if(!firstAttack)
+        {
+            TriggerAnim("Attack1");
+            firstAttack = true;
+        }
+        else
+        {
+            TriggerAnim("Attack2");
+            firstAttack = false;
+        }
+    }
+
+    public void SpecialAttack()
+    {
+        TriggerAnim("SpecialAttack");
+    }
+
+    public void UltimateAttack()
+    {
+        TriggerAnim("UltimateAttack");
     }
 }

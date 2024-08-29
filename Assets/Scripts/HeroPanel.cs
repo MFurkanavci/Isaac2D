@@ -43,6 +43,7 @@ internal class HeroPanelItem: MonoBehaviour
         transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = hero.heroName;
 
         gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);
+        gameObject.transform.GetChild(1).GetComponent<UnityEngine.UI.Image>().sprite = hero.heroSprite;
     }
 
     public void OnClick()

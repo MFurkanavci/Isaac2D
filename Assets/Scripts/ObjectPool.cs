@@ -72,6 +72,11 @@ public class ObjectPool : MonoBehaviour
     // Method to return an object to the pool
     public void ReturnToPool(GameObject obj, string tag)
     {
+        if (!poolDictionary.ContainsKey(tag))
+        {
+            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
+            return;
+        }
         obj.SetActive(false);
         poolDictionary[tag].Enqueue(obj);
 

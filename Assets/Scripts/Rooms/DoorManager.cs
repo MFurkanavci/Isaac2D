@@ -38,7 +38,7 @@ public class DoorManager : MonoBehaviour
         doors.Clear();
         foreach (Transform child in transform)
         {
-            child.gameObject.SetActive(false);
+            if (child.gameObject.activeInHierarchy) child.gameObject.SetActive(false);
         }
     }
 

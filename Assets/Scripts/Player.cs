@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     public int level;
 
+    public Animator anim;
+
     private void Awake()
     {
         if (Instance == null)
@@ -35,11 +37,19 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        
+        
+        
     }
 
     public void InıtializePlayerStats(HeroSO hero)
     {
+        
+
+        GameObject model = Instantiate(hero.heroPrefab, transform);
+        
+        anim = model.GetComponent<Animator>();
+
         this.hero = hero;
         maxHealth = hero.maxHealth;
         currentHealth = maxHealth;
@@ -51,9 +61,12 @@ public class Player : MonoBehaviour
         money = 0;
 
         UIManager.Instance.nextHp = HpPercentage();
+        gameObject.AddComponent<PlayerShooting>();
+        gameObject.AddComponent<PlayerMovement>();
 
         gameObject.GetComponent<PlayerMovement>().InitializePlayerMovement(hero);
         gameObject.GetComponent<PlayerShooting>().InitializePlayerShooting(hero);
+        
     }
 
     private void Start()
@@ -71,7 +84,7 @@ public class Player : MonoBehaviour
     }
     public float ExpPercentage()
     {
-        return (float)experience/(float)experianceToNextLevel;
+        return (float)experience / (float)experianceToNextLevel;
     }
     public void UseMana(float amount)
     {
@@ -92,12 +105,16 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        //play death animation
-        //play death sound
-        //reset player position
-        //reset player health
-        //reset player money
+        gameObject.GetComponent<PlayerMovement>().enabled = false;
+        gameObject.GetComponent<PlayerShooting>().enabled = false;
+        anim.SetTrigger("Death");
+        RoomManager.Instance.cleaner.SetActive(true);
+        Invoke("Restart", 5f);
+        
+    }
 
+    public void Restart()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -152,7 +169,7 @@ public class Player : MonoBehaviour
         experianceToNextLevel = 100 + level * 10;
         experience -= experianceToNextLevel;
         level++;
-        
+
 
     }
 }

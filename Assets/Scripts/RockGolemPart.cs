@@ -11,6 +11,7 @@ public class RockGolemPart : MonoBehaviour
     public int bulletDamage = 2;
     void Start()
     {
+        gameObject.tag = "EnemyBullet";
         StartCoroutine(DestroyBullet());
     }
     void Update()

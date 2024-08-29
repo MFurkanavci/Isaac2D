@@ -84,4 +84,9 @@ public abstract class Enemy : MonoBehaviour
     {
         StopAllCoroutines();
     }
+
+    public virtual void Clean()
+    {
+        Die();
+    }
 }

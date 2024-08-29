@@ -12,6 +12,8 @@ public class RoomManager : MonoBehaviour
     private int roomExperience;
     private int keyAmount = 15;
 
+    public GameObject cleaner;
+
     [System.Serializable]
     public struct RoomData
     {
@@ -80,10 +82,15 @@ public class RoomManager : MonoBehaviour
 
     public void ExitRoom()
     {
-
+        Cleaner();
         Destroy(currentRoom.gameObject);
         currentRoom = null;
         room = null;
+    }
+
+    public void Cleaner()
+    {
+        cleaner.SetActive(true);
     }
 
     public void GenerateRoom(RoomType roomType)

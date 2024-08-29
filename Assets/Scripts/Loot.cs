@@ -27,7 +27,7 @@ public class Loot : MonoBehaviour
         //play pickup sound
         //add loot to player inventory
         //destroy the loot
-        ObjectPool.Instance.ReturnToPool(gameObject, "Loot");
+        ObjectPool.Instance.ReturnToPool(gameObject, tag);
 
     }
 
