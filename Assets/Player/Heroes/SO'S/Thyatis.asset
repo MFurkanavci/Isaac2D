@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroSprite: {fileID: 21300000, guid: d9605673bd256ea4a97579e303e72451, type: 3}
   heroPrefab: {fileID: 0}
-  heroClass: 3
+  heroClass: 2
   heroName: Thyatis
   maxHealth: 50
   maxMana: 50

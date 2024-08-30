@@ -7,7 +7,6 @@ using UnityEngine;
 public class EnemyLaser : Enemy
 {
     [Header("Laser Enemy")]
-
     public GameObject laser;
     public GameObject laserPreviewPrefab;
     public Transform firePoint;
@@ -24,18 +23,6 @@ public class EnemyLaser : Enemy
         laser.SetActive(false);
         laserPreviewPrefab.SetActive(false);
         base.Start();
-    }
-    protected override void Update()
-    {
-        base.Update();
-    }
-    protected override void Move()
-    {
-        base.Move();
-    }
-    protected override void Die()
-    {
-        base.Die();
     }
     void FixedUpdate()
     {
@@ -56,12 +43,6 @@ public class EnemyLaser : Enemy
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-    }
-
-
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
     }
 
     void PreviewLaserToLaser()
@@ -86,6 +67,25 @@ public class EnemyLaser : Enemy
         yield return new WaitForSeconds(1f);
         StopLaser();
         isAttack = false;
+    }
+
+    public override void Freeze(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    public override void Stun(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    IEnumerator StunCoroutine(float duration)
+    {
+        float tempSpeed = moveSpeed;
+        moveSpeed = 0;
+        nextFireTime += duration;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = tempSpeed;
     }
 
 }

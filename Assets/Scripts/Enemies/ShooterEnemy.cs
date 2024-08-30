@@ -54,4 +54,24 @@ public class ShooterEnemy : Enemy
         bullet.GetComponent<EnemyBullet>().direction = (player.position - transform.position).normalized;
         nextFireTime = Time.time + fireRate;
     }
+    public override void Freeze(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    public override void Stun(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    IEnumerator StunCoroutine(float duration)
+    {
+        float tempSpeed = moveSpeed;
+        float tempFireRate = fireRate;
+        moveSpeed = 0;
+        fireRate = 0;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = tempSpeed;
+        fireRate = tempFireRate;
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,6 +28,10 @@ public class Player : MonoBehaviour
 
     public Animator anim;
 
+    public List<MissileSpells> missileSpells;
+
+    public List<MissileSpells> selectedMissileSpells;
+
     private void Awake()
     {
         if (Instance == null)
@@ -37,17 +42,17 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        
-        
+
+
+
     }
 
     public void InıtializePlayerStats(HeroSO hero)
     {
-        
+
 
         GameObject model = Instantiate(hero.heroPrefab, transform);
-        
+
         anim = model.GetComponent<Animator>();
 
         this.hero = hero;
@@ -66,7 +71,6 @@ public class Player : MonoBehaviour
 
         gameObject.GetComponent<PlayerMovement>().InitializePlayerMovement(hero);
         gameObject.GetComponent<PlayerShooting>().InitializePlayerShooting(hero);
-        
     }
 
     private void Start()
@@ -110,7 +114,7 @@ public class Player : MonoBehaviour
         anim.SetTrigger("Death");
         RoomManager.Instance.cleaner.SetActive(true);
         Invoke("Restart", 5f);
-        
+
     }
 
     public void Restart()

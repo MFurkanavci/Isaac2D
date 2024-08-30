@@ -20,6 +20,9 @@ public abstract class Enemy : MonoBehaviour
     public int maxHealth;
     public int damage;
 
+    private bool mmhit = false;
+
+    SpriteRenderer spriteRenderer;
 
     protected virtual void OnEnable()
     {
@@ -31,6 +34,7 @@ public abstract class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
         health = maxHealth;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void Update()
@@ -88,5 +92,139 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Clean()
     {
         Die();
+    }
+    public void ApplyEffect(MissileSpells missile)
+    {
+        switch (missile.missileType)
+        {
+            case MissileType.Fireball:
+                DOT(missile.damage, missile.DOTDuration);
+                break;
+            case MissileType.Iceball:
+                SlowDown(missile.slowDuration);
+                break;
+            case MissileType.Lightningball:
+                Electrocute(missile.damage, missile.DOTDuration, missile.radius);
+                break;
+            case MissileType.MagicMissile:
+                DealDamageToClosestEnemy(missile.damage, missile.radius, missile.DOTDuration);
+                break;
+        }
+
+        TakeDamage(missile.damage);
+    }
+    public virtual void SlowDown(float duration)
+    {
+        StartCoroutine(SlowDownCoroutine(duration));
+    }
+
+    private IEnumerator SlowDownCoroutine(float duration)
+    {
+        moveSpeed /= 2;
+        spriteRenderer.color = Color.blue;
+        yield return new WaitForSeconds(duration);
+        moveSpeed *= 2;
+        spriteRenderer.color = Color.clear;
+    }
+
+    public virtual void DOT(int damage, float duration)
+    {
+        StartCoroutine(DOTCoroutine(damage, duration));
+    }
+
+    private IEnumerator DOTCoroutine(int damage, float duration)
+    {
+        for (int i = 0; i < duration; i++)
+        {
+            spriteRenderer.color = Color.red;
+            TakeDamage(damage);
+            yield return new WaitForSeconds(1);
+        }
+
+        spriteRenderer.color = Color.clear;
+    }
+
+    public virtual void Stun(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    public virtual void Freeze(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        float tempSpeed = moveSpeed;
+        moveSpeed = 0;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = tempSpeed;
+    }
+
+    public virtual void Electrocute(int damage, float duration, float radius)
+    {
+        StartCoroutine(ElectrocuteCoroutine(damage, duration, radius));
+    }
+
+    private IEnumerator ElectrocuteCoroutine(int damage, float duration, float radius)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].TryGetComponent(out Enemy enemy) && enemy != this)
+            {
+                enemy.spriteRenderer.color = Color.yellow;
+                enemy.TakeDamage(damage);
+            }
+        }
+        yield return new WaitForSeconds(duration);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].TryGetComponent(out Enemy enemy) && enemy != this)
+            {
+                enemy.spriteRenderer.color = Color.clear;
+            }
+        }
+    }
+
+    public virtual void DealDamageToClosestEnemy(int damage, float radius, float duration)
+    {
+        if (mmhit) return;
+
+        spriteRenderer.color = Color.magenta;
+
+        mmhit = true;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        float minDistance = Mathf.Infinity;
+        Enemy closestEnemy = null;
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].TryGetComponent(out Enemy enemy) && enemy != this)
+            {
+                float distance = Vector2.Distance(transform.position, enemy.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestEnemy = enemy;
+                }
+            }
+        }
+        if (closestEnemy != null && !closestEnemy.mmhit)
+        {
+            closestEnemy.TakeDamage(damage);
+            closestEnemy.DealDamageToClosestEnemy(damage, radius, duration);
+        }
+
+        StartCoroutine(MMCoroutine(duration));
+    }
+
+    private IEnumerator MMCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        mmhit = false;
+        spriteRenderer.color = Color.clear;
     }
 }

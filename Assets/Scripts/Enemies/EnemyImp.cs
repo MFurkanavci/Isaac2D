@@ -21,31 +21,6 @@ public class EnemyImp : Enemy
         base.Start();
     }
 
-    protected override void Update()
-    {
-        base.Update();
-    }
-
-    protected override void Move()
-    {
-        base.Move();
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-    }
-
-    protected override void Die()
-    {
-        base.Die();
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
-    }
-
     void FixedUpdate()
     {
         if (Time.time >= nextFireTime)
@@ -70,5 +45,26 @@ public class EnemyImp : Enemy
         float newX = Random.Range(minX, maxX);
         float newY = Random.Range(minY, maxY);
         transform.position = new Vector2(newX, newY);
+    }
+
+    public override void Freeze(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    public override void Stun(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    IEnumerator StunCoroutine(float duration)
+    {
+        float tempSpeed = moveSpeed;
+        float tempFireRate = fireRate;
+        moveSpeed = 0;
+        fireRate = 0;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = tempSpeed;
+        fireRate = tempFireRate;
     }
 }
