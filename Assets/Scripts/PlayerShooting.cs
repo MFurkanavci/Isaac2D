@@ -58,6 +58,19 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+    void ShootingAnimationSpeed()
+    {
+        //we need to set the anim speed match with the fire rate of the hero, both attack1 and attack2 animations should be the same length and speed with the fire rate
+        //first we need to calculate the speed of the animations
+        //speed = 1 / fireRate
+        //then we need to set the speed of the animations
+        //anim.speed = speed
+        //we need to set the speed of the animations in the cycle attacks method
+
+        float speed = 1 / fireRate;
+        SetFloatAnim("animSpeed", speed);
+    }
+
     private void Shoot()
     {
         // Get mouse position in world space
@@ -110,6 +123,8 @@ public class PlayerShooting : MonoBehaviour
             TriggerAnim("Attack2");
             firstAttack = false;
         }
+
+        ShootingAnimationSpeed();
     }
 
     public void SpecialAttack()
