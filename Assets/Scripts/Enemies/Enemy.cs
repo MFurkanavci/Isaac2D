@@ -20,7 +20,7 @@ public abstract class Enemy : MonoBehaviour
     public int maxHealth;
     public int damage;
 
-    private bool mmhit = false;
+    private bool mmHit = false;
 
     SpriteRenderer spriteRenderer;
 
@@ -191,11 +191,11 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void DealDamageToClosestEnemy(int damage, float radius, float duration)
     {
-        if (mmhit) return;
+        if (mmHit) return;
 
         spriteRenderer.color = Color.magenta;
 
-        mmhit = true;
+        mmHit = true;
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
         float minDistance = Mathf.Infinity;
@@ -212,7 +212,7 @@ public abstract class Enemy : MonoBehaviour
                 }
             }
         }
-        if (closestEnemy != null && !closestEnemy.mmhit)
+        if (closestEnemy != null && !closestEnemy.mmHit)
         {
             closestEnemy.TakeDamage(damage);
             closestEnemy.DealDamageToClosestEnemy(damage, radius, duration);
@@ -224,7 +224,7 @@ public abstract class Enemy : MonoBehaviour
     private IEnumerator MMCoroutine(float duration)
     {
         yield return new WaitForSeconds(duration);
-        mmhit = false;
+        mmHit = false;
         spriteRenderer.color = Color.clear;
     }
 }
