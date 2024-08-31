@@ -49,7 +49,7 @@ internal class HeroPanelItem: MonoBehaviour
     public void OnClick()
     {
         Player.Instance.hero = hero;
-        Player.Instance.InıtializePlayerStats(hero);
+        Player.Instance.InitializePlayerStats(hero);
         panel.SetActive(false);
     }
 }

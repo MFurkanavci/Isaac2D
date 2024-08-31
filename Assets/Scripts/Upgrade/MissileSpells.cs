@@ -23,7 +23,7 @@ public class MissileSpells
 public enum MissileType
 {
     Fireball,
-    Iceball,
-    Lightningball,
+    IceBall,
+    LightningBall,
     MagicMissile
 }

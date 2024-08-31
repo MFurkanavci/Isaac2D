@@ -100,10 +100,10 @@ public abstract class Enemy : MonoBehaviour
             case MissileType.Fireball:
                 DOT(missile.damage, missile.DOTDuration);
                 break;
-            case MissileType.Iceball:
+            case MissileType.IceBall:
                 SlowDown(missile.slowDuration);
                 break;
-            case MissileType.Lightningball:
+            case MissileType.LightningBall:
                 Electrocute(missile.damage, missile.DOTDuration, missile.radius);
                 break;
             case MissileType.MagicMissile:

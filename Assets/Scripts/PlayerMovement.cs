@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private HeroSO hero;
     [Header("Player Components")]
     public Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     [Header("Player Stats")]
     public float moveSpeed = 5f;

@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void InıtializePlayerStats(HeroSO hero)
+    public void InitializePlayerStats(HeroSO hero)
     {
 
 
@@ -175,5 +175,12 @@ public class Player : MonoBehaviour
         level++;
 
 
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            EventRoomManager.Instance.GenerateEvent();
+        }
     }
 }
