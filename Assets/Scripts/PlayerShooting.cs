@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
+    public static PlayerShooting Instance;
     private HeroSO hero;
     //2d player shooting
     [Header("Player Components")]
     private Rigidbody2D rb;
+    public GameObject slash;
 
     [Header("Shooting")]
     public float fireRate = 0.5f;
     public float bulletLifetime = 2f;
     public float bulletSpeed = 10f;
-    private float fireTimer;
+    public float fireTimer;
 
     [Header("Bullet Pooling")]
     public string bulletTag = "Bullet";
@@ -23,6 +25,11 @@ public class PlayerShooting : MonoBehaviour
 
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else Destroy(gameObject);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -31,6 +38,8 @@ public class PlayerShooting : MonoBehaviour
         this.hero = hero;
         fireRate = hero.attackSpeed;
         bulletSpeed = hero.bulletSpeed;
+        slash = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+
     }
 
     void FixedUpdate()
@@ -41,12 +50,14 @@ public class PlayerShooting : MonoBehaviour
             if (fireTimer <= 0)
             {
                 Shoot();
+                CycleAttacks();
                 fireTimer = fireRate;
             }
-            else
-            {
-                fireTimer -= Time.deltaTime;
-            }
+
+        }
+        if (fireTimer > -0.5f)
+        {
+            fireTimer -= Time.deltaTime;
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -71,22 +82,23 @@ public class PlayerShooting : MonoBehaviour
         SetFloatAnim("animSpeed", speed);
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         // Get mouse position in world space
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Calculate direction to mouse position
         Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
-
         // Get bullet object from the pool
-        GameObject bullet = ObjectPool.Instance.GetFromPool(bulletTag, transform.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().InitializeBullet(hero.attackDamage, hero.attackRange, bulletSpeed);
+        //GameObject bullet = ObjectPool.Instance.GetFromPool(bulletTag, transform.position, Quaternion.identity);
+        slash.SetActive(true);
+        slash.GetComponent<Slash>().direction = direction;
+        slash.GetComponent<Slash>().InitializeSlash(hero.attackDamage, hero.attackRange, bulletSpeed);
 
         // Set bullet direction
-        bullet.GetComponent<Bullet>().direction = direction;
 
-        CycleAttacks();
+
+
     }
 
     public void BoolAnim(string boolName = "", bool value = false)
@@ -113,7 +125,7 @@ public class PlayerShooting : MonoBehaviour
 
     public void CycleAttacks()
     {
-        if(!firstAttack)
+        if (!firstAttack)
         {
             TriggerAnim("Attack1");
             firstAttack = true;

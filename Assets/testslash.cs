@@ -12,6 +12,7 @@ public class testslash : MonoBehaviour
     void OnEnable()
     {
         anim.SetTrigger("Slash");
+     
     }
     void Disable()
     {

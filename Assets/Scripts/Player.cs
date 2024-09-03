@@ -49,9 +49,7 @@ public class Player : MonoBehaviour
 
     public void InitializePlayerStats(HeroSO hero)
     {
-
-
-        GameObject model = Instantiate(hero.heroPrefab, transform);
+            GameObject model = Instantiate(hero.heroPrefab, transform);
 
         anim = model.GetComponent<Animator>();
 
