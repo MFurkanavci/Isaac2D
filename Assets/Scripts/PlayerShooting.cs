@@ -39,7 +39,7 @@ public class PlayerShooting : MonoBehaviour
     void FixedUpdate()
     {
         // Shoot when left mouse button is pressed or held down(be sure both conditions are the same)
-        
+
         //TODO:if they see us rollin, they hatin (we cant shoot)
         if (Input.GetMouseButton(0) && hero != null)
         {
@@ -81,9 +81,10 @@ public class PlayerShooting : MonoBehaviour
         gameObject.GetComponentInChildren<SpriteRenderer>().flipX = direction.x < 0;
 
         slash.SetActive(true);
-        slash.GetComponent<Slash>().SetPositionAndDirection(direction);
-        slash.GetComponent<Slash>().InitializeSlash(hero.attackDamage, hero.attackRange, hero.attackSpeed);
-
+        /*  
+            slash.GetComponent<Slash>().SetPositionAndDirection(direction);
+            slash.GetComponent<Slash>().InitializeSlash(hero.attackDamage, hero.attackRange, hero.attackSpeed);
+        */
 
         CycleAttacks();
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour
 {
-    public Animator anim;
+   /* public Animator anim;
     public int damage;
     public float animationSpeed;
     public float attackArea;
@@ -49,6 +49,6 @@ public class Slash : MonoBehaviour
         {
             enemy.TakeDamage(damage);
         }
-    }
+    }*/
 
 }

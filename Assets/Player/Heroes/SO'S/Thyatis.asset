@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a989224794333094a9336f957ce34df2, type: 3}
   m_Name: Thyatis
   m_EditorClassIdentifier: 
-  heroSprite: {fileID: 21300000, guid: d9605673bd256ea4a97579e303e72451, type: 3}
-  heroPrefab: {fileID: 0}
+  heroSprite: {fileID: 21300000, guid: 58912cadb062d3d49a81f692712e074e, type: 3}
+  heroPrefab: {fileID: 3311906711321869274, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
   heroClass: 2
   heroName: Thyatis
   maxHealth: 50
