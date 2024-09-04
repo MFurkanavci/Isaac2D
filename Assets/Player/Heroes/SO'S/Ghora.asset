@@ -18,12 +18,12 @@ MonoBehaviour:
   heroName: Ghora
   maxHealth: 50
   maxMana: 100
-  moveSpeed: 15
+  moveSpeed: 7
   rollSpeed: 20
-  rollDuration: 0.2
-  rollCooldown: 0.5
-  rollInvincibilityDuration: 0.2
-  attackSpeed: 1
+  rollDuration: 0.5
+  rollCooldown: 1
+  rollInvincibilityDuration: 0.5
+  attackSpeed: 0.5
   attackDamage: 1
   attackRange: 1
   bulletSpeed: 20

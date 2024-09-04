@@ -14,8 +14,4 @@ public class testattack : MonoBehaviour
     {
         testSlash.SetActive(false);
     }
-    void Shoot()
-    {
-        PlayerShooting.Instance.Shoot();
-    }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public static PlayerShooting Instance;
     private HeroSO hero;
     //2d player shooting
     [Header("Player Components")]
@@ -25,11 +24,6 @@ public class PlayerShooting : MonoBehaviour
 
     void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else Destroy(gameObject);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -45,12 +39,13 @@ public class PlayerShooting : MonoBehaviour
     void FixedUpdate()
     {
         // Shoot when left mouse button is pressed or held down(be sure both conditions are the same)
+        
+        //TODO:if they see us rollin, they hatin (we cant shoot)
         if (Input.GetMouseButton(0) && hero != null)
         {
             if (fireTimer <= 0)
             {
                 Shoot();
-                CycleAttacks();
                 fireTimer = fireRate;
             }
 
@@ -71,13 +66,6 @@ public class PlayerShooting : MonoBehaviour
 
     void ShootingAnimationSpeed()
     {
-        //we need to set the anim speed match with the fire rate of the hero, both attack1 and attack2 animations should be the same length and speed with the fire rate
-        //first we need to calculate the speed of the animations
-        //speed = 1 / fireRate
-        //then we need to set the speed of the animations
-        //anim.speed = speed
-        //we need to set the speed of the animations in the cycle attacks method
-
         float speed = 1 / fireRate;
         SetFloatAnim("animSpeed", speed);
     }
@@ -89,15 +77,15 @@ public class PlayerShooting : MonoBehaviour
 
         // Calculate direction to mouse position
         Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
-        // Get bullet object from the pool
-        //GameObject bullet = ObjectPool.Instance.GetFromPool(bulletTag, transform.position, Quaternion.identity);
+
+        gameObject.GetComponentInChildren<SpriteRenderer>().flipX = direction.x < 0;
+
         slash.SetActive(true);
-        slash.GetComponent<Slash>().direction = direction;
-        slash.GetComponent<Slash>().InitializeSlash(hero.attackDamage, hero.attackRange, bulletSpeed);
-
-        // Set bullet direction
+        slash.GetComponent<Slash>().SetPositionAndDirection(direction);
+        slash.GetComponent<Slash>().InitializeSlash(hero.attackDamage, hero.attackRange, hero.attackSpeed);
 
 
+        CycleAttacks();
 
     }
 

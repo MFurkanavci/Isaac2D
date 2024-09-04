@@ -18,7 +18,7 @@ MonoBehaviour:
   heroName: Merlin
   maxHealth: 50
   maxMana: 200
-  moveSpeed: 10
+  moveSpeed: 6
   rollSpeed: 10
   rollDuration: 0.5
   rollCooldown: 2

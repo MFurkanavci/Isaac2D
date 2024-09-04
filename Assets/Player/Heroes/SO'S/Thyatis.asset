@@ -18,11 +18,11 @@ MonoBehaviour:
   heroName: Thyatis
   maxHealth: 50
   maxMana: 50
-  moveSpeed: 20
+  moveSpeed: 7
   rollSpeed: 20
-  rollDuration: 0.2
+  rollDuration: 0.33
   rollCooldown: 0.5
-  rollInvincibilityDuration: 0.2
+  rollInvincibilityDuration: 0.33
   attackSpeed: 0.5
   attackDamage: 3
   attackRange: 20

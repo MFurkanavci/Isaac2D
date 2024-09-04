@@ -128,17 +128,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2819386027213373718}
     m_Modifications:
+    - target: {fileID: 2653223774503710366, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3908295814424565559, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
       propertyPath: animClip
       value: 
       objectReference: {fileID: 7400000, guid: 8c18f3f50ebba1f4e8d82bc0a302048e, type: 2}
+    - target: {fileID: 5144881383955039246, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
+      propertyPath: m_Color.a
+      value: 0.6862745
+      objectReference: {fileID: 0}
     - target: {fileID: 5255306107171948614, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
       propertyPath: m_Name
       value: Slash
       objectReference: {fileID: 0}
+    - target: {fileID: 5255306107171948614, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7010613224567243469, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7010613224567243469, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7010613224567243469, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
       propertyPath: m_LocalPosition.y
