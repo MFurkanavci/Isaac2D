@@ -23,7 +23,8 @@ MonoBehaviour:
   rollDuration: 0.33
   rollCooldown: 1
   rollInvincibilityDuration: 0.33
+  projectile: 0
   attackSpeed: 0.5
   attackDamage: 4
-  attackRange: 0.1
+  attackRange: 0.5
   bulletSpeed: 1

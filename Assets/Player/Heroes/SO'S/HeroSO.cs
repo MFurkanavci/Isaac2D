@@ -21,12 +21,12 @@ public class HeroSO : ScriptableObject
     public float rollInvincibilityDuration;
 
     [Header("Hero Attack")]
+
+    public bool projectile;
     public float attackSpeed;
     public int attackDamage;
     public float attackRange;
     public float bulletSpeed;
-
-
 }
 
 public enum HeroClass

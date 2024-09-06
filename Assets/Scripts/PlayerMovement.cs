@@ -43,14 +43,18 @@ public class PlayerMovement : MonoBehaviour
             Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             // Flip the player sprite based on movement direction
-            if (movement.x > 0)
+            if(!Input.GetButton("Fire1"))
             {
-                spriteRenderer.flipX = false;
+                if (movement.x > 0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                else if (movement.x < 0)
+                {
+                    spriteRenderer.flipX = true;
+                }
             }
-            else if (movement.x < 0)
-            {
-                spriteRenderer.flipX = true;
-            }
+            
             //play run animation
             if (movement != Vector2.zero)
             {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2819386027213373718}
   - component: {fileID: 7849628513944597873}
   - component: {fileID: 8948753170504547705}
-  - component: {fileID: 1090747500785907702}
+  - component: {fileID: 6538555546245364576}
   m_Layer: 6
   m_Name: Ghora
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1090747500785907702
+--- !u!114 &6538555546245364576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,12 +117,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 9164807776590121438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8abe304bc75a49438bc09621cd55126, type: 3}
+  m_Script: {fileID: 11500000, guid: ecc4d70bebbd2ef45b83e3f35f3689a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slash: {fileID: 3463788685251897945}
   slashDistance: 3
+  slashSpeed: 10
+  nextSlash: 0
   mainCamera: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
 --- !u!1001 &8718758298869309983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,37 +134,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2819386027213373718}
     m_Modifications:
-    - target: {fileID: 2653223774503710366, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3908295814424565559, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
-      propertyPath: animClip
-      value: 
-      objectReference: {fileID: 7400000, guid: 8c18f3f50ebba1f4e8d82bc0a302048e, type: 2}
-    - target: {fileID: 5144881383955039246, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
-      propertyPath: m_Color.a
-      value: 0.6862745
-      objectReference: {fileID: 0}
     - target: {fileID: 5255306107171948614, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
       propertyPath: m_Name
       value: Slash
       objectReference: {fileID: 0}
-    - target: {fileID: 5255306107171948614, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7010613224567243469, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7010613224567243469, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7010613224567243469, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7010613224567243469, guid: 7a6310020aa829b45b54efbb5d705021, type: 3}
       propertyPath: m_LocalPosition.z

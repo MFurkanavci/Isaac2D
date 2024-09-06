@@ -21,11 +21,16 @@ public class Bullet : MonoBehaviour
         transform.position = Vector2.zero;
     }
 
-    public void InitializeBullet(int damage, float range, float speed)
+    public void InitializeBullet(int damage,float speed,float range)
     {
         this.damage = damage;
         bulletLifetime = range;
         bulletSpeed = speed;
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        this.direction = direction;
     }
 
     void Update()

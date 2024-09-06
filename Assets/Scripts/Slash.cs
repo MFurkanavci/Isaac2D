@@ -4,51 +4,82 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour
 {
-   /* public Animator anim;
-    public int damage;
-    public float animationSpeed;
-    public float attackArea;
+    public GameObject slash;
+    private Animator animator;
+    public float slashDistance = 3f;
+    public float slashSpeed = 10f;
+    public float nextSlash = 0f;
+
+    public Camera mainCamera;
+
+    public Vector3 direction;
+
+    void Start()
+    {
+        animator = slash.GetComponent<Animator>();
+        slash.SetActive(false);
+        mainCamera = Camera.main;
+    }
+
+    void Update()
+    {
+        if (slashSpeed > 0)
+        {
+            nextSlash -= Time.deltaTime;
+        }
+        else
+        {
+            nextSlash = 0;
+        }
+
+        if (Input.GetButton("Fire1") && nextSlash <= 0)
+        {
+            Attack(direction);
+            nextSlash = slashSpeed;
+        }
+
+        
+        direction = GetCameraDirection();
+    }
+
+    Vector3 GetCameraDirection()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 screenPoint = mainCamera.WorldToScreenPoint(transform.position);
+        Vector3 direction = (mousePos - screenPoint).normalized;
+        return direction;
+    }
+
+    void Attack(Vector3 direction)
+    {
+        Vector3 position = transform.position + direction * slashDistance;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        slash.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+        slash.transform.position = position;
+    }
 
     void OnEnable()
     {
-        SetClipSpeed();
-        StartCoroutine(SlashEnumerator());
+        slashDistance = gameObject.GetComponentInParent<Player>().hero.attackRange;
+        slashSpeed = gameObject.GetComponentInParent<Player>().hero.attackSpeed;
+        nextSlash = slashSpeed;
     }
 
-    public void SetClipSpeed()
-    {
-        anim.SetFloat("slashSpeed", animationSpeed);
-    }
     void OnDisable()
     {
-        transform.position = transform.parent.parent.position;
-        StopAllCoroutines();
-    }
-    public void InitializeSlash(int damage, float range, float speed)
-    {
-        this.damage = damage;
-        this.attackArea = range;
-        this.animationSpeed = speed;
+        nextSlash = 0;
     }
 
-    public void SetPositionAndDirection(Vector2 direction)
+
+    public void ActivateSlash()
     {
-        float offset = attackArea / 2;
-        transform.position += (Vector3)direction * offset;
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        slash.SetActive(true);
     }
 
-    IEnumerator SlashEnumerator()
+    public void DeactivateSlash()
     {
-        yield return new WaitForSeconds(animationSpeed / 2);
-        gameObject.SetActive(false);
+        slash.SetActive(false);
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            enemy.TakeDamage(damage);
-        }
-    }*/
 
 }
