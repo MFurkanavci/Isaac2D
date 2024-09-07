@@ -11,8 +11,16 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.LookAt(direction,Vector2.down);
+        SetDirection();
         StartCoroutine(ReturnToPool());
+    }
+
+    public void SetDirection()
+    {
+        //set LookAt to player
+        Vector2 lookDir = (Vector2)Player.Instance.transform.position - (Vector2)transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private void OnDisable()

@@ -20,6 +20,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.509434
       objectReference: {fileID: 0}
+    - target: {fileID: 7350570665857312992, guid: 215816e563518204092bfb2377f01523, type: 3}
+      propertyPath: m_Color.b
+      value: 0.18039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 7350570665857312992, guid: 215816e563518204092bfb2377f01523, type: 3}
+      propertyPath: m_Color.g
+      value: 0.18039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 7350570665857312992, guid: 215816e563518204092bfb2377f01523, type: 3}
+      propertyPath: m_Color.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
     - target: {fileID: 7356989698013681476, guid: 215816e563518204092bfb2377f01523, type: 3}
       propertyPath: m_Name
       value: MiniBossRoom Variant
