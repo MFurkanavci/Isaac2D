@@ -18,6 +18,7 @@ public class PlayerShooting : MonoBehaviour
     public float fireTimer;
 
     private Vector2 direction;
+    private Vector2 shootDirection;
 
     private bool hasAttack2;
 
@@ -28,6 +29,7 @@ public class PlayerShooting : MonoBehaviour
     public float animationBreathTime = 0.1f; // Adjust this for the idle/run time between attacks
 
     private bool isAttacking = false;
+
 
     void Start()
     {
@@ -139,7 +141,7 @@ public class PlayerShooting : MonoBehaviour
         yield return new WaitForSeconds(fireRate);
 
         // Transition to idle or running
-        TransitionToMovementState();
+        //TransitionToMovementState();
 
         // Pause before next attack
         yield return new WaitForSeconds(animationBreathTime);
@@ -150,14 +152,15 @@ public class PlayerShooting : MonoBehaviour
 
     private void TransitionToMovementState()
     {
+
         // Check if player is moving, and transition to running if so
         if (rb.velocity.magnitude > 0.1f)
         {
-            TriggerAnim("Run"); // Go back to running if moving
+            //TriggerAnim("Run"); // Go back to running if moving
         }
         else
         {
-            TriggerAnim("Idle"); // Go back to idle if standing still
+            //TriggerAnim("Idle"); // Go back to idle if standing still
         }
     }
 
@@ -172,31 +175,37 @@ public class PlayerShooting : MonoBehaviour
 
     public void Shoot(Vector2 direction)
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().flipX = direction.x < 0;
+
+        // Play shooting animation
+        TriggerAnim("Attack1");
+
+        CycleAttacks();
+    }
+    public void ShootEffect()
+    {
+        shootDirection = GetCameraDirection();
+        gameObject.GetComponentInChildren<SpriteRenderer>().flipX = shootDirection.x < 0;
 
         // Get bullet from object pool
         GameObject bullet = ObjectPool.Instance.GetFromPool(bulletTag, bulletPoint.transform.position, Quaternion.identity);
 
         // Set bullet position and rotation
         bullet.transform.position = bulletPoint.transform.position;
-        bullet.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        bullet.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg);
 
         // Set bullet damage, speed and lifetime
         bullet.GetComponent<Bullet>().InitializeBullet(hero.attackDamage, bulletSpeed, bulletLifetime);
 
         // Set bullet direction
-        bullet.GetComponent<Bullet>().SetDirection(direction);
+        bullet.GetComponent<Bullet>().SetDirection(shootDirection);
 
         // Set bullet active
         bullet.SetActive(true);
 
-        // Play shooting animation
-        TriggerAnim("Attack1");
-
         // Set animation speed
         ShootingAnimationSpeed();
 
-        CycleAttacks();
+
     }
 
     public void ShootingAnimationSpeed()

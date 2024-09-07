@@ -11,6 +11,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnEnable()
     {
+        transform.LookAt(direction,Vector2.down);
         StartCoroutine(ReturnToPool());
     }
 
