@@ -19,6 +19,7 @@ MonoBehaviour:
   maxHealth: 50
   maxMana: 200
   moveSpeed: 6
+  rollCount: 1
   rollSpeed: 10
   rollDuration: 0.5
   rollCooldown: 2

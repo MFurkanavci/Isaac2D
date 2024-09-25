@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroPanel : MonoBehaviour
 {
@@ -40,7 +41,7 @@ internal class HeroPanelItem: MonoBehaviour
     {
         this.hero = hero;
         this.panel = panel;
-        transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = hero.heroName;
+        transform.GetChild(0).GetComponent<Text>().text = hero.heroName;
 
         gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(OnClick);
         gameObject.transform.GetChild(1).GetComponent<UnityEngine.UI.Image>().sprite = hero.heroSprite;

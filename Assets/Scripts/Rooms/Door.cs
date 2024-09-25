@@ -5,11 +5,21 @@ public class Door : MonoBehaviour
     public RoomType doorType;
     public Sprite sprite;
 
+    public GameObject particles;
+
     public bool isLocked = true;
 
     public void OpenDoor()
     {
         isLocked = false;
+
+        RunParticles();
+    }
+
+    public void RunParticles()
+    {
+        particles = transform.GetChild(1).gameObject;
+        particles.GetComponent<ParticleSystem>().Play();
     }
 
     public void CloseDoor()
@@ -35,6 +45,7 @@ public class Door : MonoBehaviour
         if (spriteRenderer != null)
         {
             spriteRenderer.sprite = sprite;
+            spriteRenderer.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = sprite;
         }
     }
 

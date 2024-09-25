@@ -51,5 +51,10 @@ public class Bullet : MonoBehaviour
             enemy.TakeDamage(1);
             ObjectPool.Instance.ReturnToPool(gameObject, gameObject.tag);
         }
+
+        if (other.gameObject.TryGetComponent(out Walls wall))
+        {
+            ObjectPool.Instance.ReturnToPool(gameObject, gameObject.tag);
+        }
     }
 }

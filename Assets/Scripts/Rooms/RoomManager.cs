@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
-    public TextMeshProUGUI keyAmountText;
+    //public TextMeshProUGUI keyAmountText;
+    public Text keyAmountText;
     public Room currentRoom;
     GameObject room;
     public RoomType currentRoomType;

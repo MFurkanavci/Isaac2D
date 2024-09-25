@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,12 +13,14 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
 
     [Header("Rolling")]
+    public int rollCount = 0;
     public float rollSpeed = 10f;
     public float rollDuration = 0.3f;
     public float rollCooldown = 1f;
     public float rollInvincibility = 0.3f;
     private bool isRolling = false;
-    private bool canRoll = true;
+
+    public GameObject rollDisplayParent;
 
     void Start()
     {
@@ -26,13 +29,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void InitializePlayerMovement(HeroSO hero)
     {
-        
+
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         this.hero = hero;
         moveSpeed = hero.moveSpeed;
         rollSpeed = hero.rollSpeed;
         rollDuration = hero.rollDuration;
         rollCooldown = hero.rollCooldown;
+
+        rollDisplayParent = GameObject.Find("RollDisplay");
+
+        for (int i = 0; i < hero.rollCount; i++)
+        {
+            AddDash();
+        }
+    }
+
+    public void AddDash()
+    {
+        Instantiate(Player.Instance.dashThing, rollDisplayParent.transform);
+        rollCount++;
     }
 
     void Update()
@@ -43,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             // Flip the player sprite based on movement direction
-            if(!Input.GetButton("Fire1"))
+            if (!Input.GetButton("Fire1"))
             {
                 if (movement.x > 0)
                 {
@@ -54,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
                     spriteRenderer.flipX = true;
                 }
             }
-            
+
             //play run animation
             if (movement != Vector2.zero)
             {
@@ -75,20 +91,51 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = movement * moveSpeed;
 
             // Handle rolling input
-            if (canRoll && Input.GetKeyDown(KeyCode.Space) && movement != Vector2.zero)
+            if (CanRoll() && Input.GetKeyDown(KeyCode.Space) && movement != Vector2.zero)
             {
                 StartCoroutine(Roll(movement));
             }
         }
     }
 
+    public void RollDisplay()
+    {
+        for (int i = 0; i < rollDisplayParent.transform.childCount; i++)
+        {
+            rollDisplayParent.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < rollCount; i++)
+        {
+            rollDisplayParent.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
+    public bool CanRoll()
+    {
+        if (rollCount > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private IEnumerator Roll(Vector2 direction)
     {
-        Vector2 rollDirection;
+
+        if (rollCount <= 0) yield break; // Prevent rolling if no rolls are left.
+
         isRolling = true;
-        canRoll = false;
-        rollDirection = direction;
+        rollCount--; // Decrease roll count after initiating a roll.
+
         TriggerAnim("Roll");
+        
+        RollDisplay();
+
+        Vector2 rollDirection = direction;
 
         // Apply initial roll velocity
         rb.velocity = rollDirection * rollSpeed;
@@ -97,7 +144,6 @@ public class PlayerMovement : MonoBehaviour
         Physics2D.IgnoreLayerCollision(6, 7, true);
         Physics2D.IgnoreLayerCollision(6, 8, true);
         Physics2D.IgnoreLayerCollision(6, 10, true);
-        Physics2D.IgnoreLayerCollision(6, 11, true);
 
         // Gradually reduce speed during the roll
         float elapsedTime = 0f;
@@ -108,8 +154,6 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
 
-       
-        isRolling = false;
         // Ensure the velocity is zero after rolling
         rb.velocity = Vector2.zero;
 
@@ -117,12 +161,17 @@ public class PlayerMovement : MonoBehaviour
         Physics2D.IgnoreLayerCollision(6, 7, false);
         Physics2D.IgnoreLayerCollision(6, 8, false);
         Physics2D.IgnoreLayerCollision(6, 10, false);
-        Physics2D.IgnoreLayerCollision(6, 11, false);
+
+        isRolling = false;
 
         // Wait for cooldown before allowing the next roll
         yield return new WaitForSeconds(rollCooldown);
-        canRoll = true;
+        
+        rollCount++;
+
+        RollDisplay();
     }
+
 
     public void BoolAnim(string boolName = "", bool value = false)
     {

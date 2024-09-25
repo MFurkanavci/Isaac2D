@@ -19,12 +19,13 @@ MonoBehaviour:
   maxHealth: 50
   maxMana: 50
   moveSpeed: 7
+  rollCount: 2
   rollSpeed: 20
   rollDuration: 0.33
-  rollCooldown: 0.5
+  rollCooldown: 2
   rollInvincibilityDuration: 0.33
   projectile: 1
-  attackSpeed: 1
+  attackSpeed: 0.3
   attackDamage: 3
   attackRange: 5
-  bulletSpeed: 15
+  bulletSpeed: 25

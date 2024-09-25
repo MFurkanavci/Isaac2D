@@ -15,6 +15,7 @@ public class HeroSO : ScriptableObject
 
     [Header("Hero Movement")]
     public float moveSpeed;
+    public int rollCount;
     public float rollSpeed;
     public float rollDuration;
     public float rollCooldown;

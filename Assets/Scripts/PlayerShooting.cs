@@ -44,11 +44,11 @@ public class PlayerShooting : MonoBehaviour
 
         if (!hero.projectile)
         {
-            slash = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+            slash = transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
         }
         else
         {
-            bulletPoint = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+            bulletPoint = transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
         }
 
         foreach (var parameter in Player.Instance.anim.parameters)

@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 
     public List<MissileSpells> selectedMissileSpells;
 
+    public GameObject dashThing;
+
     private void Awake()
     {
         if (Instance == null)
@@ -42,14 +44,11 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
-
     }
 
     public void InitializePlayerStats(HeroSO hero)
     {
-            GameObject model = Instantiate(hero.heroPrefab, transform);
+        GameObject model = Instantiate(hero.heroPrefab, transform);
 
         anim = model.GetComponent<Animator>();
 

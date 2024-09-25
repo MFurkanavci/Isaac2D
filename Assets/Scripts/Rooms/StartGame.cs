@@ -8,7 +8,6 @@ public class StartGame : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Player player))
         {
-            
             DoorManager.Instance.GenerateDoors();
             DoorManager.Instance.OpenDoors();
             Destroy(gameObject);
