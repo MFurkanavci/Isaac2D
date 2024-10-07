@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootTag: Loot
   lootDropChance: 0.5
-  moveSpeed: 0.5
+  moveSpeed: 0
   health: 2
   maxHealth: 0
   damage: 1

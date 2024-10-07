@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -98,11 +96,52 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
         UIManager.Instance.nextHp = HpPercentage();
         ScreenHandling.instance.ShakeScreen();
+        StartCoroutine("TakingHit");
         if (currentHealth <= 0)
         {
             Die();
         }
     }
+
+    IEnumerator TakingHit()
+    {
+        // Get the player's current scale
+        Vector3 originalScale = Vector3.one;
+
+        // Define the target scale after hit (only reducing the x scale)
+        Vector3 targetScale = new Vector3(originalScale.x * 0.5f, originalScale.y, originalScale.z);
+
+        // Time duration for the scaling effect
+        float duration = 0.05f; // Adjust this to control the speed
+        float elapsedTime = 0f;
+
+        // Scale down over the given duration
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the final scale is set to the target scale
+        transform.localScale = targetScale;
+
+        // You can add a delay if you want before scaling back to normal
+        yield return new WaitForSeconds(0.05f);
+
+        // Scale back to the original scale smoothly
+        elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(targetScale, originalScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the final scale is set back to the original scale
+        transform.localScale = originalScale;
+    }
+
 
     public void Die()
     {
