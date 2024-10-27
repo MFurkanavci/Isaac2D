@@ -70,16 +70,20 @@ public class Door : MonoBehaviour
                 print(GetDoorType() + " door entered");
                 RoomManager.Instance.GenerateRoom(GetDoorType());
                 print(RoomManager.Instance.GetCurrentRoom() + " room generated");
-                
+
                 if (RoomManager.Instance.GetCurrentRoom().roomType == RoomType.CombatRoom)
                 {
                     EnemySpawner.Instance.StartSpawning();
+                }
+                else if (RoomManager.Instance.GetCurrentRoom().roomType != RoomType.TrapRoom)
+                {
+                    EventRoomManager.Instance.GenerateEvent();
                 }
 
                 isLocked = true;
 
                 player.transform.position = new Vector3(player.transform.position.x, -player.transform.position.y, player.transform.position.z);
-                
+
             }
         }
     }

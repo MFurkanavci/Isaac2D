@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance;
-    
+
     [Header("Enemy Pooling")]
     public List<string> enemyTags;
 
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
+
         currentEnemies = totalEnemies;
     }
     private void Update()
@@ -60,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartSpawning()
     {
-        
+
         currentEnemies = totalEnemies;
         DoorManager.Instance.CloseDoors();
         player = GameObject.Find("Player").GetComponent<Player>();
@@ -97,7 +97,7 @@ public class EnemySpawner : MonoBehaviour
         //We will set the next spawn time
         nextSpawnTime = Time.time + spawnRate;
 
-        
+
 
         Vector3 _spawnPoint = SetNewSpawnPoint();
         float radius = 1f;

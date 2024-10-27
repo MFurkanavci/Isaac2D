@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class testslash : MonoBehaviour
 {
-    Animator anim;
-    void Start()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        anim = GetComponent<Animator>();
-    }
-    void OnEnable()
-    {
-        anim.SetTrigger("Slash");
-     
-    }
-    void Disable()
-    {
-        gameObject.SetActive(false);
+         if (other.gameObject.TryGetComponent(out Enemy enemy))
+        {
+            enemy.TakeDamage(1);
+            ObjectPool.Instance.ReturnToPool(gameObject, gameObject.tag);
+        }
+
     }
 }

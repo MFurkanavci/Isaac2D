@@ -38,7 +38,7 @@ public class Slash : MonoBehaviour
             nextSlash = slashSpeed;
         }
 
-        
+
         direction = GetCameraDirection();
     }
 
@@ -81,5 +81,13 @@ public class Slash : MonoBehaviour
     {
         slash.SetActive(false);
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.TryGetComponent(out Enemy enemy))
+        {
+            enemy.TakeDamage(3);
+            ObjectPool.Instance.ReturnToPool(gameObject, gameObject.tag);
+        }
 
+    }
 }

@@ -212,11 +212,4 @@ public class Player : MonoBehaviour
 
 
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            EventRoomManager.Instance.GenerateEvent();
-        }
-    }
 }

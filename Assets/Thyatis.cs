@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Thyatis : MonoBehaviour
 {
-
     void AnimationStart()
     {
         Player.Instance.gameObject.GetComponent<PlayerShooting>().ShootEffect();

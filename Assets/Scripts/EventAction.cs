@@ -36,10 +36,17 @@ public abstract class EventAction : MonoBehaviour
             TriggerEvent();
         }
     }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.TryGetComponent<Player>(out _))
+        {
+            TriggerEvent();
+        }
+    }
 
     protected virtual void TriggerEvent()
     {
-        
+
     }
     public virtual void EventComplete()
     {

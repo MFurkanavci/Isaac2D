@@ -6,6 +6,7 @@ using UnityEngine;
 public class EventRoomManager : MonoBehaviour
 {
     public static EventRoomManager Instance { get; private set; }
+    public List<GameEvents> events = new();
     void Awake()
     {
         if (Instance == null)
@@ -15,7 +16,7 @@ public class EventRoomManager : MonoBehaviour
         else Destroy(gameObject);
 
     }
-    public List<GameEvents> events = new();
+
 
 
     void Start()
