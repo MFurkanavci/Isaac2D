@@ -75,7 +75,7 @@ public class Door : MonoBehaviour
                 {
                     EnemySpawner.Instance.StartSpawning();
                 }
-                else if (RoomManager.Instance.GetCurrentRoom().roomType != RoomType.TrapRoom)
+                else if (RoomManager.Instance.GetCurrentRoom().roomType == RoomType.EventRoom)
                 {
                     EventRoomManager.Instance.GenerateEvent();
                 }
