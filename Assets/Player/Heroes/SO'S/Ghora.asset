@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroSprite: {fileID: 21300000, guid: 127ecf94aca6e104094091269ca54077, type: 3}
   heroPrefab: {fileID: 9164807776590121438, guid: 803a6f4e0b953ad42b97205155af7a76, type: 3}
-  heroClass: 0
+  heroClass: 3
   heroName: Ghora
   maxHealth: 50
   maxMana: 100
