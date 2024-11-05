@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EventRoomManager : MonoBehaviour
 {
     public static EventRoomManager Instance { get; private set; }
