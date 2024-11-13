@@ -71,14 +71,24 @@ public class Door : MonoBehaviour
                 RoomManager.Instance.GenerateRoom(GetDoorType());
                 print(RoomManager.Instance.GetCurrentRoom() + " room generated");
 
-                if (RoomManager.Instance.GetCurrentRoom().roomType == RoomType.CombatRoom)
+                if (RoomManager.Instance.GetCurrentRoom().roomType == RoomType.CombatRoomEasy)
                 {
-                    EnemySpawner.Instance.StartSpawning();
+                    EnemySpawner.Instance.StartSpawningEasy();
+                }
+                else if (RoomManager.Instance.GetCurrentRoom().roomType == RoomType.CombatRoomMedium)
+                {
+                    EnemySpawner.Instance.StartSpawningNormal();
+                }
+                else if (RoomManager.Instance.GetCurrentRoom().roomType == RoomType.CombatRoomHard)
+                {
+                    EnemySpawner.Instance.StartSpawningHard();
                 }
                 else if (RoomManager.Instance.GetCurrentRoom().roomType == RoomType.EventRoom)
                 {
                     EventRoomManager.Instance.GenerateEvent();
                 }
+
+
 
                 isLocked = true;
 

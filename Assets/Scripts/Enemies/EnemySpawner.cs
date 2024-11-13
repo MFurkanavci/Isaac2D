@@ -7,9 +7,15 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance;
+    public RoomManager roomManager;
 
     [Header("Enemy Pooling")]
-    public List<string> enemyTags;
+    public List<string> enemyTagsEasy;
+    public List<string> enemyTagsHard;
+    public List<string> enemyTagsNormal;
+
+    public List<string> enemyTagsImpossible;
+
 
     [Header("Spawning")]
     public GameObject Room;
@@ -38,7 +44,6 @@ public class EnemySpawner : MonoBehaviour
             Destroy(gameObject);
         }
 
-
         currentEnemies = totalEnemies;
     }
     private void Update()
@@ -47,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
         {
             if (Time.time >= nextSpawnTime && currentEnemies > 0)
             {
-                SpawnGroup();
+                SpawnGroup(roomManager.currentRoomType);
             }
             if (currentEnemies <= 0 && enemies.Count <= 0)
             {
@@ -58,7 +63,45 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void StartSpawning()
+    public void StartSpawningEasy()
+    {
+
+        currentEnemies = totalEnemies;
+        DoorManager.Instance.CloseDoors();
+        player = GameObject.Find("Player").GetComponent<Player>();
+        Room = RoomManager.Instance.currentRoom.gameObject;
+        roomSize = Room.GetComponent<SpriteRenderer>().bounds.size;
+        nextSpawnTime = Time.time + spawnRate;
+
+        isSpawning = true;
+    }
+    public void StartSpawningNormal()
+    {
+
+        currentEnemies = totalEnemies;
+        DoorManager.Instance.CloseDoors();
+        player = GameObject.Find("Player").GetComponent<Player>();
+        Room = RoomManager.Instance.currentRoom.gameObject;
+        roomSize = Room.GetComponent<SpriteRenderer>().bounds.size;
+        nextSpawnTime = Time.time + spawnRate;
+
+        isSpawning = true;
+    }
+    public void StartSpawningHard()
+    {
+        List<string>[] enemyTagLists = { enemyTagsNormal, enemyTagsEasy, enemyTagsHard };
+        List<string> selectedList = enemyTagLists[UnityEngine.Random.Range(0, enemyTagLists.Length)];
+        string enemyTag = selectedList[UnityEngine.Random.Range(0, selectedList.Count)];
+        currentEnemies = totalEnemies;
+        DoorManager.Instance.CloseDoors();
+        player = GameObject.Find("Player").GetComponent<Player>();
+        Room = RoomManager.Instance.currentRoom.gameObject;
+        roomSize = Room.GetComponent<SpriteRenderer>().bounds.size;
+        nextSpawnTime = Time.time + spawnRate;
+
+        isSpawning = true;
+    }
+    public void StartSpawningImpossible()
     {
 
         currentEnemies = totalEnemies;
@@ -77,7 +120,7 @@ public class EnemySpawner : MonoBehaviour
         isSpawning = false;
     }
 
-    private void SpawnGroup()
+    private void SpawnGroup(RoomType roomType)
     {
         int enemiesToSpawn;
         int minEnemiesPerGroup;
@@ -102,14 +145,62 @@ public class EnemySpawner : MonoBehaviour
         Vector3 _spawnPoint = SetNewSpawnPoint();
         float radius = 1f;
         //We will spawn the enemies with their own radius
-        for (int i = 0; i < enemiesToSpawn; i++)
+        if (roomType == RoomType.CombatRoomEasy)
         {
-            string enemyTag = enemyTags[UnityEngine.Random.Range(0, enemyTags.Count)];
-            Vector3 spawnPosition = _spawnPoint + UnityEngine.Random.insideUnitSphere * radius;
-            GameObject _enmy = ObjectPool.Instance.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
-            enemies.Add(_enmy);
-            currentEnemies--;
+            print("start spawn");
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+
+                string enemyTag = enemyTagsEasy[UnityEngine.Random.Range(0, enemyTagsEasy.Count)];
+                Vector3 spawnPosition = _spawnPoint + UnityEngine.Random.insideUnitSphere * radius;
+                GameObject _enmy = ObjectPool.Instance.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
+                enemies.Add(_enmy);
+                currentEnemies--;
+            }
         }
+        else if (roomType == RoomType.CombatRoomMedium)
+        {
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+                List<string> selectedList;
+                float randomValue = UnityEngine.Random.value * 100f;
+                if (randomValue < 40f)
+                {
+                    selectedList = enemyTagsNormal;
+                }
+                else selectedList = enemyTagsEasy;
+
+                string enemyTag = selectedList[UnityEngine.Random.Range(0, selectedList.Count)];
+                Vector3 spawnPosition = _spawnPoint + UnityEngine.Random.insideUnitSphere * radius;
+                GameObject _enmy = ObjectPool.Instance.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
+                enemies.Add(_enmy);
+                currentEnemies--;
+            }
+        }
+        else if (roomType == RoomType.CombatRoomHard)
+        {
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+                List<string> selectedList;
+                float randomValue = UnityEngine.Random.value * 100f;
+                if (randomValue < 15f)
+                {
+                    selectedList = enemyTagsHard;
+                }
+                else if (randomValue < 45f)
+                {
+                    selectedList = enemyTagsNormal;
+                }
+                else selectedList = enemyTagsEasy;
+
+                string enemyTag = selectedList[UnityEngine.Random.Range(0, selectedList.Count)];
+                Vector3 spawnPosition = _spawnPoint + UnityEngine.Random.insideUnitSphere * radius;
+                GameObject _enmy = ObjectPool.Instance.GetFromPool(enemyTag, spawnPosition, quaternion.identity);
+                enemies.Add(_enmy);
+                currentEnemies--;
+            }
+        }
+
     }
 
     public void RemoveEnemy(GameObject enemy)

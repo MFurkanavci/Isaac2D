@@ -2,7 +2,10 @@ public enum RoomType
 {
     StartRoom,
     EventRoom,
-    CombatRoom,
+    CombatRoomEasy,
+    CombatRoomMedium,
+    CombatRoomHard,
+    CombatRoomImpossible,
     TrapRoom,
     MiniBossRoom,
     BossRooms,

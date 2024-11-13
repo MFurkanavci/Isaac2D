@@ -18,13 +18,6 @@ public class EventRoomManager : MonoBehaviour
 
     }
 
-
-
-    void Start()
-    {
-
-    }
-
     public void GenerateEvent()
     {
         int _random = UnityEngine.Random.Range(0, events.Count);

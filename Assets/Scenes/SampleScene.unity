@@ -926,63 +926,6 @@ Transform:
   - {fileID: 1617583224}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &342365878
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 935893121}
-    m_Modifications:
-    - target: {fileID: 3311906711321869274, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_Name
-      value: Thyatis
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
 --- !u!1 &423673388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,11 +1302,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547709758}
   m_CullTransparentMesh: 1
---- !u!4 &595430173 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5918708946143500606, guid: 4b45f0e1e3a42bd48a6570b68aeedf9c, type: 3}
-  m_PrefabInstance: {fileID: 342365878}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &659176046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,38 +1816,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76fc0bfc47a021b4da508139b237bf04, type: 3}
---- !u!1 &935893120
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 935893121}
-  m_Layer: 0
-  m_Name: yarakfurkan
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &935893121
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935893120}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 595430173}
-  m_Father: {fileID: 1649435073}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &987272518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,19 +2596,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ab39bf3d6cdd44c83f27c139c17693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTags:
+  roomManager: {fileID: 1884842658}
+  enemyTagsEasy:
   - GoblinEnemy
-  - ShooterEnemy
-  - SkeletonEnemy
   - LaserEnemy
-  - WolfEnemy
+  - ShooterEnemy
   - GolemEnemy
+  enemyTagsHard:
+  - SkeletonEnemy
+  enemyTagsNormal:
   - ImpEnemy
+  - WolfEnemy
+  enemyTagsImpossible: []
   Room: {fileID: 0}
   distanceFromPlayer: 5
   totalEnemies: 5
   totalIncrease: 2
-  currentEnemies: 0
+  currentEnemies: 1
   spawnRate: 0.5
   enemies: []
 --- !u!4 &1240042411
@@ -4072,51 +3982,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 318910520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1649435071
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1649435073}
-  - component: {fileID: 1649435072}
-  m_Layer: 0
-  m_Name: Parent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1649435072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649435071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d192f534efb640049945d41064b79906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1649435073
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649435071}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9331498, y: 0.60761803, z: -0.0002515592}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 935893121}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1711483954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4457,7 +4322,7 @@ MonoBehaviour:
     canSpawnMultiple: 1
     roomSprite: {fileID: 421537165, guid: 57b67686f8f573d43963cab201e97622, type: 3}
     roomPrefab: {fileID: 930417881379591245, guid: 09e3cd2500d813e45a245f92db4cc5a8, type: 3}
-  - roomType: 3
+  - roomType: 6
     baseWeight: 20
     currentWeight: 0
     maxWeight: 50
@@ -4465,7 +4330,7 @@ MonoBehaviour:
     canSpawnMultiple: 1
     roomSprite: {fileID: 446435554, guid: 57b67686f8f573d43963cab201e97622, type: 3}
     roomPrefab: {fileID: 2683751413190475309, guid: 5255c45097f639747b007478e8f1549c, type: 3}
-  - roomType: 4
+  - roomType: 7
     baseWeight: 0
     currentWeight: 0
     maxWeight: 20
@@ -4473,7 +4338,7 @@ MonoBehaviour:
     canSpawnMultiple: 0
     roomSprite: {fileID: -1382835727, guid: 57b67686f8f573d43963cab201e97622, type: 3}
     roomPrefab: {fileID: 1980540101838796206, guid: bd5e12a4f65122a4c8a0579e1ce6d4ee, type: 3}
-  - roomType: 7
+  - roomType: 10
     baseWeight: 0
     currentWeight: 0
     maxWeight: 20
@@ -4481,6 +4346,30 @@ MonoBehaviour:
     canSpawnMultiple: 0
     roomSprite: {fileID: 114169373, guid: 57b67686f8f573d43963cab201e97622, type: 3}
     roomPrefab: {fileID: 2931195768478380629, guid: 27fe9e44fb396d945be6cf41d7fcbd34, type: 3}
+  - roomType: 3
+    baseWeight: 16
+    currentWeight: 11
+    maxWeight: 39
+    weightIncrease: 1
+    canSpawnMultiple: 1
+    roomSprite: {fileID: 1056716715, guid: c32f9668ba5ca734889aa1c99aa25993, type: 3}
+    roomPrefab: {fileID: 9008711255183970875, guid: 80dbc58bc41fe1a4e9eae9b0b34d3d6c, type: 3}
+  - roomType: 4
+    baseWeight: 14
+    currentWeight: 9
+    maxWeight: 80
+    weightIncrease: 5
+    canSpawnMultiple: 1
+    roomSprite: {fileID: -112143572, guid: c32f9668ba5ca734889aa1c99aa25993, type: 3}
+    roomPrefab: {fileID: 2228394006397458978, guid: 896d26cd381bcd54fb5db36b41435bcb, type: 3}
+  - roomType: 5
+    baseWeight: 14
+    currentWeight: 28
+    maxWeight: 20
+    weightIncrease: 39
+    canSpawnMultiple: 1
+    roomSprite: {fileID: 21300000, guid: debae97fc59def241b679c87f6ab05e8, type: 3}
+    roomPrefab: {fileID: 7858004309549649430, guid: c10dcd6c0004c194d9011fc31277a7ce, type: 3}
 --- !u!1 &1915689317
 GameObject:
   m_ObjectHideFlags: 0
@@ -5513,4 +5402,3 @@ SceneRoots:
   - {fileID: 8085587316755548560}
   - {fileID: 1099939303}
   - {fileID: 76034184}
-  - {fileID: 1649435073}
