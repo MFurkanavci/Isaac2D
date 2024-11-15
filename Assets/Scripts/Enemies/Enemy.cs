@@ -34,7 +34,7 @@ public abstract class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
         health = maxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void Update()
@@ -51,11 +51,25 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        TakingDamageEffect();
         health -= damage;
         if (health <= 0)
         {
             Die();
         }
+    }
+
+    protected virtual void TakingDamageEffect()
+    {
+        spriteRenderer.color = Color.red;
+        gameObject.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+        Invoke("ResetColorAndScale", 0.05f);
+    }
+
+    protected virtual void ResetColorAndScale()
+    {
+        spriteRenderer.color = Color.white;
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
     }
 
     protected virtual void Die()
